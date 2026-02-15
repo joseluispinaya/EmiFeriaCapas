@@ -557,6 +557,15 @@
     <Content Include="assets\vendor\datatables\extensiones\js\jszip.min.js" />
     <Content Include="assets\vendor\datatables\jquery.dataTables.js" />
     <Content Include="assets\vendor\datatables\jquery.dataTables.min.js" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\idioma\datepicker-es.js" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\jquery-ui.css" />
+    <Content Include="assets\vendor\datepiker-jquery-ui\jquery-ui.js" />
     <Content Include="assets\vendor\daterangepicker\daterangepicker.css" />
     <Content Include="assets\vendor\daterangepicker\daterangepicker.js" />
     <Content Include="assets\vendor\daterangepicker\demo.html" />
@@ -2958,6 +2967,16 @@
     <Folder Include="assets\vendor\rater-js\example\" />
     <Folder Include="assets\vendor\rater-js\test\" />
     <Folder Include="assets\vendor\swiper\types\modules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
+      <Project>{f640e010-6516-40b7-af6e-1f09290bee30}</Project>
+      <Name>CapaEntidad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
+      <Project>{aa3728ce-d503-4884-92c6-0dc53282b05f}</Project>
+      <Name>CapaNegocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

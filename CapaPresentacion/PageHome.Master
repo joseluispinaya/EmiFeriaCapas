@@ -17,9 +17,9 @@
     <link href="assets/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendor/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <%--<link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendor/datatables/extensiones/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/vendor/datatables/extensiones/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables/extensiones/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />--%>
 
     <!-- Theme Config Js -->
     <script src="assets/js/config.js"></script>
@@ -68,9 +68,9 @@
                 <i class="ti ti-x align-middle"></i>
             </button>
 
-            <div data-simplebar>
+            <div data-simplebar="">
 
-                <!--- Sidenav Menu <div data-simplebar=""> <div data-simplebar="true"> -->
+                <!--- Sidenav Menu <div data-simplebar> <div data-simplebar="true"> -->
                 <ul class="side-nav">
 
                     <li class="side-nav-item">
@@ -297,7 +297,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
 
-        <div class="offcanvas-body p-0 h-100" data-simplebar>
+        <!-- <div class="offcanvas-body p-0 h-100" data-simplebar> -->
+        <div class="offcanvas-body p-0 h-100" data-simplebar="">
             <div class="p-3 border-bottom border-dashed">
                 <h5 class="mb-3 fs-16 fw-bold">Esquema de colores</h5>
 
@@ -573,7 +574,7 @@
     <script src="assets/vendor/toastr/toastr.min.js"></script>
     <script src="assets/vendor/loadingoverlay/loadingoverlay.min.js"></script>
 
-    <script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <%--<script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <script src="assets/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
@@ -581,7 +582,7 @@
     <script src="assets/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
     <script src="assets/vendor/datatables/extensiones/js/jszip.min.js"></script>
     <script src="assets/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
-    <script src="assets/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    <script src="assets/vendor/datatables/extensiones/js/buttons.print.min.js"></script>--%>
 
     <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>
 
