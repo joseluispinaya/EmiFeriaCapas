@@ -169,7 +169,7 @@ $("#btnGuardarReg").on("click", function () {
         // Reemplazas toastr.warning por esto:
         Toast.fire({
             icon: 'warning',
-            title: 'Debe completar el campo de nombre'
+            title: 'Debe completar el campo de Descripcion'
         });
 
         $("#txtDescripcion").focus();
@@ -198,8 +198,7 @@ $("#btnGuardarReg").on("click", function () {
             $("#modalAdd").find("div.modal-content").LoadingOverlay("hide");
 
             if (response.d.Estado) {
-                //swal("Mensaje", response.d.Mensaje, "success");
-
+                //mostrarAlerta("¡Mensaje!", response.d.Mensaje, "success", "btn btn-success");
                 Swal.fire({
                     title: "¡Mensaje!",
                     text: response.d.Mensaje,

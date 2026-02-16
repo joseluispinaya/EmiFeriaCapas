@@ -93,24 +93,24 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarInvoice" aria-expanded="false" aria-controls="sidebarInvoice" class="side-nav-link">
                             <span class="menu-icon"><i class="ti ti-file-invoice"></i></span>
-                            <span class="menu-text"> Invoice</span>
+                            <span class="menu-text"> Grados Academicos</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarInvoice">
                             <ul class="sub-menu">
                                 <li class="side-nav-item">
-                                    <a href="#" class="side-nav-link">
-                                        <span class="menu-text">Invoices</span>
+                                    <a href="GradosPage.aspx" class="side-nav-link">
+                                        <span class="menu-text">Grados</span>
                                     </a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a href="#" class="side-nav-link">
-                                        <span class="menu-text">View Invoice</span>
+                                    <a href="CarrerasPage.aspx" class="side-nav-link">
+                                        <span class="menu-text">Carreras</span>
                                     </a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a href="#" class="side-nav-link">
-                                        <span class="menu-text">Create Invoice</span>
+                                    <a href="EstudiantesPage.aspx" class="side-nav-link">
+                                        <span class="menu-text">Estudiantes</span>
                                     </a>
                                 </li>
                             </ul>
@@ -573,6 +573,8 @@
     <script src="assets/vendor/sweetalert2/sweetalert2.min.js"></script>
     <script src="assets/vendor/toastr/toastr.min.js"></script>
     <script src="assets/vendor/loadingoverlay/loadingoverlay.min.js"></script>
+
+    <script src="js/Masterpa.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
 
     <%--<script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
