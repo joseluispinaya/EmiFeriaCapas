@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PageHome.Master" AutoEventWireup="true" CodeBehind="EstudiantesPage.aspx.cs" Inherits="CapaPresentacion.EstudiantesPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PageHome.Master" AutoEventWireup="true" CodeBehind="DocentesPage.aspx.cs" Inherits="CapaPresentacion.DocentesPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendor/datatables/extensiones/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -9,42 +9,21 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="d-flex card-header justify-content-between align-items-center">
-                    <h4 class="header-title">Estudiantes Registrados</h4>
+                    <h4 class="header-title">Docentes Registrados</h4>
                     <button type="button" id="btnNuevore" class="btn btn-info btn-sm">Agregar <i class="ti ti-plus ms-1"></i></button>
                 </div>
 
                 <div class="card-body">
-
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="input-group input-group-sm">
-                                        <label class="input-group-text" for="cboGrados">Grados</label>
-                                        <select class="form-select" id="cboGrados">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group input-group-sm">
-                                        <label class="input-group-text" for="cboCarreras">Carreras</label>
-                                        <select class="form-select" id="cboCarreras">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <table class="table table-striped table-sm" id="tbEstudiantes" cellspacing="0" style="width: 100%">
+                    <table class="table table-striped table-sm" id="tbDocentes" cellspacing="0" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Id</th>
                                 <th>Imagen</th>
-                                <th>Estudiantes</th>
+                                <th>Docentes</th>
                                 <th>Nro CI</th>
                                 <th>Correos</th>
-                                <th>Carrera</th>
+                                <th>Celular</th>
+                                <th>Estado</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
@@ -61,7 +40,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modalLabeldetalle">Estudiantes</h4>
+                    <h4 class="modal-title" id="modalLabeldetalle">Docentes</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -96,16 +75,16 @@
                                         <input type="number" id="txtCelular" name="Celular" class="form-control form-control-sm model">
                                     </div>
                                     <div class="mb-1">
-                                        <label for="txtCodigo" class="form-label">Codigo</label>
-                                        <input type="text" id="txtCodigo" name="Codigo" class="form-control form-control-sm model">
+                                        <label for="txtProfesion" class="form-label">Profesion</label>
+                                        <input type="text" id="txtProfesion" name="Profesion" class="form-control form-control-sm model">
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-4">
                             <div class="text-center mb-2">
-                                <img src="Imagenes/sinimagen.png" id="imgEstud" alt="image" class="img-fluid rounded-circle" width="125" />
+                                <img src="Imagenes/sinimagen.png" id="imgDocente" alt="image" class="img-fluid rounded-circle" width="125" />
                             </div>
                             <div class="mb-2">
                                 <label for="cboEstado" class="form-label">Select Estado</label>
@@ -137,5 +116,5 @@
     <script src="assets/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
     <script src="assets/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
 
-    <script src="js/EstudiantesPage.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
+    <script src="js/DocentesPage.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
 </asp:Content>

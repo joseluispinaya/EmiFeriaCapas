@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ECarrera.cs" />
+    <Compile Include="EDocente.cs" />
+    <Compile Include="EEstudiante.cs" />
+    <Compile Include="EEstudiantesDTO.cs" />
     <Compile Include="EFeria.cs" />
     <Compile Include="EGradoAcademico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

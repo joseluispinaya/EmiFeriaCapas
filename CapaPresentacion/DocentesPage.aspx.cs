@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace CapaPresentacion
 {
-    public partial class EstudiantesPage : System.Web.UI.Page
+    public partial class DocentesPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,13 +19,13 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
-        public static Respuesta<List<EEstudiantesDTO>> ListaEstudiantes(int IdGradoAcademico, int IdCarrera)
+        public static Respuesta<List<EDocente>> ListaDocentes()
         {
-            return NEstudiante.GetInstance().ListaEstudiantes(IdGradoAcademico, IdCarrera);
+            return NDocente.GetInstance().ListaDocentes();
         }
 
         [WebMethod]
-        public static Respuesta<bool> Guardar(EEstudiante objeto, string base64Image)
+        public static Respuesta<bool> Guardar(EDocente objeto, string base64Image)
         {
             try
             {
@@ -41,17 +41,17 @@ namespace CapaPresentacion
                     // 2. Usamos tu misma clase Utilidadesj (no tienes que cambiarle nada)
                     using (var stream = new MemoryStream(imageBytes))
                     {
-                        string folder = "/Imagenes/";
+                        string folder = "/ImagenesDoce/";
                         imageUrl = utilidades.UploadPhoto(stream, folder);
                     }
                 }
 
                 string clavePlana = objeto.NroCi;
-                objeto.ImagenEstUrl = imageUrl;
+                objeto.ImagenUrl = imageUrl;
                 objeto.ClaveHash = utilidades.Hash(clavePlana);
 
                 // Mandamos a guardar a BD
-                return NEstudiante.GetInstance().RegistrarEstudiante(objeto);
+                return NDocente.GetInstance().RegistrarDocente(objeto);
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
-        public static Respuesta<bool> Editar(EEstudiante objeto, string base64Image)
+        public static Respuesta<bool> Editar(EDocente objeto, string base64Image)
         {
             try
             {
@@ -74,10 +74,10 @@ namespace CapaPresentacion
 
                     using (var stream = new MemoryStream(imageBytes))
                     {
-                        string folder = "/Imagenes/";
+                        string folder = "/ImagenesDoce/";
 
                         // Sobrescribimos la URL del objeto con la nueva imagen subida
-                        objeto.ImagenEstUrl = utilidades.UploadPhoto(stream, folder);
+                        objeto.ImagenUrl = utilidades.UploadPhoto(stream, folder);
                     }
                 }
                 // IMPORTANTE: Si base64Image está vacío, el IF se salta.
@@ -86,7 +86,7 @@ namespace CapaPresentacion
 
                 // 2. Mandamos a actualizar a la BD
                 // (Asegúrate de que este método llame a tu usp_ModificarEstudiante que armamos antes)
-                return NEstudiante.GetInstance().EditarEstudiante(objeto);
+                return NDocente.GetInstance().EditarDocente(objeto);
             }
             catch (Exception ex)
             {
