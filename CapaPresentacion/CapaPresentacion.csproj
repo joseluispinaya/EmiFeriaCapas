@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AreasPage.aspx" />
     <Content Include="assets\css\app-rtl.css" />
     <Content Include="assets\css\app-rtl.min.css" />
     <Content Include="assets\css\app.css" />
@@ -2856,6 +2857,7 @@
     <Content Include="assets\vendor\vanilla-wizard\js\wizard.min.js" />
     <Content Include="assets\vendor\wnumb\wNumb.min.js" />
     <Content Include="CarrerasPage.aspx" />
+    <Content Include="CategoriasPage.aspx" />
     <Content Include="DocentesPage.aspx" />
     <Content Include="EstudiantesPage.aspx" />
     <Content Include="FeriasPage.aspx" />
@@ -2863,21 +2865,41 @@
     <Content Include="ImagenesDoce\muchapp.png" />
     <Content Include="Imagenes\sinimagen.png" />
     <Content Include="Inicio.aspx" />
+    <Content Include="js\AreasPage.js" />
     <Content Include="js\CarrerasPage.js" />
+    <Content Include="js\CategoriasPage.js" />
     <Content Include="js\DocentesPage.js" />
     <Content Include="js\EstudiantesPage.js" />
     <Content Include="js\FeriasPage.js" />
     <Content Include="js\GradosPage.js" />
+    <Content Include="js\LineasPage.js" />
     <Content Include="js\Masterpa.js" />
+    <Content Include="js\ReportesPage.js" />
+    <Content Include="LineasPage.aspx" />
+    <Content Include="ReportesPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreasPage.aspx.cs">
+      <DependentUpon>AreasPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AreasPage.aspx.designer.cs">
+      <DependentUpon>AreasPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CarrerasPage.aspx.cs">
       <DependentUpon>CarrerasPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CarrerasPage.aspx.designer.cs">
       <DependentUpon>CarrerasPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriasPage.aspx.cs">
+      <DependentUpon>CategoriasPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CategoriasPage.aspx.designer.cs">
+      <DependentUpon>CategoriasPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="DocentesPage.aspx.cs">
       <DependentUpon>DocentesPage.aspx</DependentUpon>
@@ -2914,6 +2936,13 @@
     <Compile Include="Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LineasPage.aspx.cs">
+      <DependentUpon>LineasPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LineasPage.aspx.designer.cs">
+      <DependentUpon>LineasPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PageHome.Master.cs">
       <DependentUpon>PageHome.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2922,6 +2951,13 @@
       <DependentUpon>PageHome.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportesPage.aspx.cs">
+      <DependentUpon>ReportesPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportesPage.aspx.designer.cs">
+      <DependentUpon>ReportesPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utilidadesj.cs" />
   </ItemGroup>
   <ItemGroup>

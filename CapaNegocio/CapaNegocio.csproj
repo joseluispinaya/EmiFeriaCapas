@@ -41,11 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NAreaInvest.cs" />
     <Compile Include="NCarrera.cs" />
+    <Compile Include="NCategoria.cs" />
     <Compile Include="NDocente.cs" />
     <Compile Include="NEstudiante.cs" />
     <Compile Include="NFeria.cs" />
     <Compile Include="NGradoAcademico.cs" />
+    <Compile Include="NLineaInvest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

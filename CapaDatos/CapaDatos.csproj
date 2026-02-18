@@ -42,11 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionBD.cs" />
+    <Compile Include="DAreaInvest.cs" />
     <Compile Include="DCarrera.cs" />
+    <Compile Include="DCategoria.cs" />
     <Compile Include="DDocente.cs" />
     <Compile Include="DEstudiante.cs" />
     <Compile Include="DFeria.cs" />
     <Compile Include="DGradoAcademico.cs" />
+    <Compile Include="DLineaInvest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
