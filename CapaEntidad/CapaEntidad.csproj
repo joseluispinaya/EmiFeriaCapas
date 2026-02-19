@@ -49,8 +49,11 @@
     <Compile Include="EEstudiantesDTO.cs" />
     <Compile Include="EFeria.cs" />
     <Compile Include="EGradoAcademico.cs" />
+    <Compile Include="EGrupoEstudiante.cs" />
     <Compile Include="ELineaInvest.cs" />
+    <Compile Include="EProyecto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProyectoReportDTO.cs" />
     <Compile Include="Respuesta.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

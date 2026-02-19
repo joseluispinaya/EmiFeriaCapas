@@ -2,11 +2,39 @@
 // 1. Array Global para almacenar los estudiantes seleccionados
 let EstudiantesSeleccionados = [];
 
+//$(document).ready(function () {
+//    $("#CboLinea").prop("disabled", true);
+//    cargarCategorias();
+//    cargarAreas();
+//    cargarBuscadorDocentes();
+//    cargarBuscadorEstudiantes();
+//});
+
 $(document).ready(function () {
-    $("#CboLinea").prop("disabled", true);
-    cargarCategorias();
-    cargarAreas();
-    cargarBuscadorEstudiantes();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const idFeria = urlParams.get('id');
+
+    if (idFeria !== null && idFeria.trim() !== "") {
+        $("#txtIdFeria").val(idFeria);
+        $("#CboLinea").prop("disabled", true);
+        cargarCategorias();
+        cargarAreas();
+        cargarBuscadorDocentes();
+        cargarBuscadorEstudiantes();
+    } else {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "No hay parámetro válido en la URL",
+            showConfirmButton: false,
+            timer: 2000
+        });
+
+        setTimeout(function () {
+            window.location.href = 'Inicio.aspx';
+        }, 2500);
+    }
 });
 
 function cargarCategorias() {
@@ -146,6 +174,66 @@ function cargarLineas(idArea) {
     });
 }
 
+// inicio configuracion docentes
+function cargarBuscadorDocentes() {
+    $("#cboBuscarDocente").select2({
+        ajax: {
+            url: "DocentesPage.aspx/FiltroDocentes",
+            dataType: 'json',
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            delay: 250,
+            data: function (params) {
+                return JSON.stringify({ busqueda: params.term });
+            },
+            processResults: function (data) {
+                return {
+                    results: data.d.Data.map((item) => ({
+                        id: item.IdDocente,
+                        text: item.Nombres + ' ' + item.Apellidos,
+                        nroCi: item.NroCi,
+                        celular: item.Celular,
+                        imagen: item.ImagenUrl,
+                        dataCompleta: item
+                    }))
+                };
+            },
+        },
+        language: "es",
+        placeholder: 'Buscar por Nombre o CI...',
+        minimumInputLength: 3,
+        templateResult: formatoResultadosDocente
+    });
+}
+
+function formatoResultadosDocente(data) {
+    if (data.loading) return data.text;
+
+    var imagenMostrar = data.imagen ? data.imagen : 'Imagenes/sinimagen.png';
+
+    var contenedor = $(
+        `<div class="d-flex align-items-center">
+            <img src="${imagenMostrar}" style="height:40px; width:40px; margin-right:10px; border-radius:50%; object-fit:cover;"/>
+            <div>
+                <div style="font-weight: bold;">${data.text}</div>
+                <div style="font-size: 0.85em; color: #666;">CI: ${data.nroCi} | Cel: ${data.celular}</div>
+            </div>
+         </div>`
+    );
+
+    return contenedor;
+}
+
+$("#cboBuscarDocente").on("select2:select", function (e) {
+    const data = e.params.data;
+    $("#txtIdTutor").val(data.id);
+    $("#txtNombreTutor").val(data.text);
+    $("#txtCelu").val(data.celular);
+    $("#cboBuscarDocente").val(null).trigger("change");
+});
+
+// fin configuracion docentes
+
 // 2. Configuración del Select2 (AJAX)
 function cargarBuscadorEstudiantes() {
     $("#cboBuscarEstudiante").select2({
@@ -214,7 +302,6 @@ $("#cboBuscarEstudiante").on("select2:select", function (e) {
             icon: 'warning',
             title: 'El estudiante ya fue agregado al grupo.'
         });
-        //toastr.warning("El estudiante ya fue agregado al grupo.");
         $("#cboBuscarEstudiante").val(null).trigger("change"); // Limpiar selección
         return false;
     }
@@ -267,3 +354,137 @@ window.eliminarEstudiante = function (index) {
     EstudiantesSeleccionados.splice(index, 1); // Quitar del array
     mostrarTablaEstudiantes(); // Repintar tabla
 }
+
+function habilitarBoton() {
+    $('#btnGuardar').prop('disabled', false);
+}
+
+$("#btnGuardar").on("click", function () {
+
+    let listaFinal = [];
+
+    $('#btnGuardar').prop('disabled', true);
+
+    let idTutor = $("#txtIdTutor").val();
+
+    if (idTutor === "0" || idTutor === "") {
+        ToastMaster.fire({
+            icon: 'warning',
+            title: 'Debe buscar y seleccionar un Tutor'
+        });
+        habilitarBoton();
+        return;
+    }
+
+    if ($("#cboCategoria").val() === "") {
+        ToastMaster.fire({
+            icon: 'warning',
+            title: 'Debe seleccionar una Categoria'
+        });
+        $("#cboCategoria").focus();
+        habilitarBoton();
+        return;
+    }
+
+    if ($("#CboLinea").val() === "") {
+        ToastMaster.fire({
+            icon: 'warning',
+            title: 'Debe seleccionar una Linea de Investigacion'
+        });
+        $("#CboLinea").focus();
+        habilitarBoton();
+        return;
+    }
+
+    if ($("#txtTitulo").val().trim() === "") {
+        ToastMaster.fire({
+            icon: 'warning',
+            title: 'Debe completar el Titulo del Proyecto'
+        });
+        $("#txtTitulo").focus();
+        habilitarBoton();
+        return;
+    }
+
+    if (EstudiantesSeleccionados.length < 1) {
+        mostrarAlerta("¡Alerta!", "Debe seleccionar los estudiantes del proyecto", "warning", "btn btn-warning");
+        habilitarBoton();
+        return;
+    }
+
+    EstudiantesSeleccionados.forEach((item) => {
+        listaFinal.push({
+            IdEstudiante: item.IdEstudiante
+        });
+    });
+
+    var request = {
+        objeto: {
+            NombreProyecto: $("#txtTitulo").val().trim(),
+            IdFeria: parseInt($("#txtIdFeria").val()),
+            IdCategoria: parseInt($("#cboCategoria").val()),
+            IdLinea: parseInt($("#CboLinea").val()),
+            IdDocente: parseInt($("#txtIdTutor").val())
+        },
+        ListaGrupoEst: listaFinal
+    };
+
+    $("#loadd").LoadingOverlay("show");
+
+    $.ajax({
+        url: "ReportesPage.aspx/RegistrarProyecto",
+        type: "POST",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            $("#loadd").LoadingOverlay("hide");
+
+            if (response.d.Estado) {
+
+                const idProyecto = response.d.Data;
+                console.log("ID del proyecto registrado:", idProyecto);
+
+                ToastMaster.fire({
+                    icon: 'success',
+                    title: response.d.Mensaje
+                });
+
+                var url = 'ReporteProyecto.aspx?id=' + idProyecto;
+                window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+
+                // crear una funcion para generar un reporte usando idProyecto que retorna
+                // Swal.fire({
+                //     position: "top-end",
+                //     icon: "success",
+                //     title: response.d.Mensaje,
+                //     showConfirmButton: false,
+                //     timer: 2000
+                // });
+
+                // setTimeout(function () {
+                //     window.location.href = 'Inicio.aspx';
+                // }, 2500);
+
+            } else {
+                mostrarAlerta("¡Mensaje!", response.d.Mensaje, "warning", "btn btn-warning");
+            }
+        },
+        error: function () {
+            $("#loadd").LoadingOverlay("hide");
+            mostrarAlerta("¡Mensaje!", "Error de comunicación con el servidor.", "error", "btn btn-danger");
+        },
+        complete: function () {
+            habilitarBoton();
+        }
+    });
+
+})
+
+$("#btnImprimirr").on("click", function () {
+
+    var url = 'ReporteProyecto.aspx?id=' + 1;
+    window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+})
+
+// fin configuracion estudiantes

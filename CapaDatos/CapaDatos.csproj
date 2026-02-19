@@ -50,6 +50,7 @@
     <Compile Include="DFeria.cs" />
     <Compile Include="DGradoAcademico.cs" />
     <Compile Include="DLineaInvest.cs" />
+    <Compile Include="DProyecto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

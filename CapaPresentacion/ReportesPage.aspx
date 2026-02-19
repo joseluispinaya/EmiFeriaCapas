@@ -6,13 +6,13 @@
         <div class="col-12">
             <div class="card position-relative">
 
-                <div class="card-body">
+                <div class="card-body" id="loadd">
                     <!-- Invoice Logo-->
-                    <div class="d-flex align-items-start justify-content-between mb-4">
-                        <div class="overflow-hidden position-relative border rounded d-flex align-items-center justify-content-start px-2" style="height: 60px; width: 260px;">
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                        <div class="overflow-hidden position-relative d-flex align-items-center justify-content-start px-2" style="height: 60px; width: 180px;">
                             <label for="imageInput" class="position-absolute top-0 start-0 end-0 bottom-0"></label>
-                            <!-- <input class="d-none" type="file" id="imageInput"> -->
-                            <img id="preview" src="assets/images/logo-dark.png" alt="Preview Image" height="28">
+                            <!-- <input class="d-none" type="file" id="imageInput"> 28 -->
+                            <img id="preview" src="assets/images/logoEmi.png" alt="Preview Image" height="50">
                         </div>
 
                         <div class="text-end">
@@ -27,27 +27,19 @@
                         </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="form-label" for="InvoiceNote">Titulo del Proyecto : </label>
-                        <textarea class="form-control" id="InvoiceNote" placeholder="Ingrese el titulo del proyecto " rows="3"></textarea>
+                    <input type="hidden" value="0" id="txtIdFeria">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="txtTitulo">Titulo del Proyecto : </label>
+                        <textarea class="form-control" id="txtTitulo" placeholder="Ingrese el titulo del proyecto " rows="3"></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 mt-3">
                             <div class="mb-2">
-                                <label class="form-label">Select Tutor :</label>
-                                <select class="form-control select2" data-toggle="select2">
-                                    <option>Select</option>
-                                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                                        <option value="Jose Luis">Jose Luis</option>
-                                        <option value="Mario Apaza">Mario Apaza</option>
-                                    </optgroup>
-                                    <optgroup label="Pacific Time Zone">
-                                        <option value="CA">California</option>
-                                        <option value="NV">Nevada</option>
-                                        <option value="OR">Oregon</option>
-                                        <option value="WA">Washington</option>
-                                    </optgroup>
+                                <label class="form-label">Buscar Tutor:</label>
+                                <select id="cboBuscarDocente" class="form-control select2" style="width: 100%;">
+                                    <option value="">Escriba el nombre o CI del tutor...</option>
                                 </select>
                             </div>
                             <div class="mb-2">
@@ -58,9 +50,10 @@
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 mt-3">
+                            <input type="hidden" value="0" id="txtIdTutor">
                             <div class="mb-2">
                                 <label class="form-label">Tutor del Proyecto :</label>
-                                <input type="text" id="BName" class="form-control" disabled value="Jose Luis Pinaya">
+                                <input type="text" id="txtNombreTutor" class="form-control" disabled>
                             </div>
 
                             <div class="mb-2">
@@ -72,7 +65,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 mt-3">
                             <div class="mb-2">
                                 <label class="form-label">Contacto del Tutor :</label>
-                                <input type="text" id="txtCelu" class="form-control" disabled value="73999726">
+                                <input type="text" id="txtCelu" class="form-control" disabled>
                             </div>
 
                             <div class="mb-2">
@@ -91,22 +84,6 @@
                                     <option value="">Escriba el nombre o CI del estudiante...</option>
                                 </select>
                             </div>
-                            <%--<div class="mb-2">
-                                <label class="form-label">Seleccionar Estudiantes :</label>
-                                <select class="form-control select2" data-toggle="select2">
-                                    <option>Select</option>
-                                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                                        <option value="Jose Luis">Jose Luis</option>
-                                        <option value="Mario Apaza">Mario Apaza</option>
-                                    </optgroup>
-                                    <optgroup label="Pacific Time Zone">
-                                        <option value="CA">California</option>
-                                        <option value="NV">Nevada</option>
-                                        <option value="OR">Oregon</option>
-                                        <option value="WA">Washington</option>
-                                    </optgroup>
-                                </select>
-                            </div>--%>
                         </div>
                     </div>
 
@@ -136,8 +113,10 @@
             <!-- end card -->
             <div class="mb-5">
                 <div class="d-flex justify-content-center gap-2">
-                    <a href="javascript: void(0);" class="btn btn-success gap-1"><i class="ti ti-device-floppy fs-16"></i>Registrar</a>
-                    <a href="javascript:window.print()" class="btn btn-primary gap-1"><i class="ti ti-printer fs-16"></i>Imprimir</a>
+                    <button type="button" id="btnGuardar" class="btn btn-success gap-1"><i class="ti ti-device-floppy fs-16"></i>Registrar</button>
+                    <%--<a href="javascript: void(0);" class="btn btn-success gap-1"><i class="ti ti-device-floppy fs-16"></i>Registrar</a>--%>
+                    <%--<a href="javascript:window.print()" class="btn btn-primary gap-1"><i class="ti ti-printer fs-16"></i>Imprimir</a>--%>
+                    <button type="button" id="btnImprimirr" class="btn btn-primary gap-1"><i class="ti ti-printer fs-16"></i>Imprimir</button>
                     <a href="javascript: void(0);" class="btn btn-info gap-1"><i class="ti ti-download fs-16"></i>Descargar</a>
                 </div>
             </div>

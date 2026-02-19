@@ -143,6 +143,20 @@ $('#tbFerias tbody').on('click', '.btn-editar', function () {
 
 });
 
+$('#tbFerias tbody').on('click', '.btn-detalle', function () {
+
+    let fila = $(this).closest('tr');
+
+    if (fila.hasClass('child')) {
+        fila = fila.prev();
+    }
+
+    let data = tablaData.row(fila).data();
+    var url = 'ReportesPage.aspx?id=' + data.IdFeria;
+    window.location.href = url;
+
+});
+
 // Configuramos SweetAlert para que actúe como un Toast
 const Toast = Swal.mixin({
     toast: true,

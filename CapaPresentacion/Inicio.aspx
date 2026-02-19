@@ -95,8 +95,9 @@
                 <div class="col-xxl-6">
                     <div class="card">
                         <div class="d-flex card-header justify-content-between align-items-center">
-                            <h4 class="header-title">Brands Listing</h4>
-                            <a href="javascript:void(0);" class="btn btn-sm btn-secondary">Add Brand <i class="ti ti-plus ms-1"></i></a>
+                            <h4 class="header-title">Pruebas Listing</h4>
+                            <button type="button" id="btnImprimirr" class="btn btn-info btn-sm">Reporte <i class="ti ti-plus ms-1"></i></button>
+                            <%--<a href="javascript:void(0);" class="btn btn-sm btn-secondary">Add Brand <i class="ti ti-plus ms-1"></i></a>--%>
                         </div>
                         <div class="card-body p-0">
                             <div class="bg-success bg-opacity-10 py-1 text-center">
@@ -660,4 +661,5 @@
     <!-- end row-->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="server">
+    <script src="js/Inicio.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
 </asp:Content>
