@@ -50,6 +50,7 @@
     <Compile Include="NGradoAcademico.cs" />
     <Compile Include="NLineaInvest.cs" />
     <Compile Include="NProyecto.cs" />
+    <Compile Include="NUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

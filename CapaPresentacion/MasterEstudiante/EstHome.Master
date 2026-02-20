@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PageHome.master.cs" Inherits="CapaPresentacion.PageHome" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="EstHome.master.cs" Inherits="CapaPresentacion.MasterEstudiante.EstHome" %>
 
 <!DOCTYPE html>
 
@@ -12,21 +12,21 @@
     <meta content="Coderthemes" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
     <!-- Sweet Alert css-->
-    <link href="assets/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Theme Config Js -->
-    <script src="assets/js/config.js"></script>
+    <script src="../assets/js/config.js"></script>
 
     <!-- Vendor css -->
-    <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -43,13 +43,13 @@
             <!-- Brand Logo -->
             <a href="#" class="logo">
                 <span class="logo-light">
-                    <span class="logo-lg"><img src="assets/images/logo.png" alt="logo"></span>
-                    <span class="logo-sm text-center"><img src="assets/images/logo-sm.png" alt="small logo"></span>
+                    <span class="logo-lg"><img src="../assets/images/logo.png" alt="logo"></span>
+                    <span class="logo-sm text-center"><img src="../assets/images/logo-sm.png" alt="small logo"></span>
                 </span>
 
                 <span class="logo-dark">
-                    <span class="logo-lg"><img src="assets/images/logo-dark.png" alt="dark logo"></span>
-                    <span class="logo-sm text-center"><img src="assets/images/logo-sm.png" alt="small logo"></span>
+                    <span class="logo-lg"><img src="../assets/images/logo-dark.png" alt="dark logo"></span>
+                    <span class="logo-sm text-center"><img src="../assets/images/logo-sm.png" alt="small logo"></span>
                 </span>
             </a>
 
@@ -69,7 +69,7 @@
                 <ul class="side-nav">
 
                     <li class="side-nav-item">
-                        <a href="Inicio.aspx" class="side-nav-link">
+                        <a href="InicioEst.aspx" class="side-nav-link">
                             <span class="menu-icon"><i class="ti ti-dashboard"></i></span>
                             <span class="menu-text"> Inicio </span>
                             <span class="badge bg-success rounded-pill">5</span>
@@ -79,79 +79,16 @@
                     <li class="side-nav-title mt-2">Menu de la App</li>
 
                     <li class="side-nav-item">
-                        <a href="FeriasPage.aspx" class="side-nav-link">
+                        <a href="#" class="side-nav-link">
                             <span class="menu-icon"><i class="ti ti-message-filled"></i></span>
                             <span class="menu-text"> Convocatorias </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                            <span class="menu-icon"><i class="ti ti-files"></i></span>
-                            <span class="menu-text"> Configuraciones </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarPages">
-                            <ul class="sub-menu">
-                                <li class="side-nav-item">
-                                    <a href="CategoriasPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Categorias</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="AreasPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Areas Invest</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="LineasPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Lineas Invest</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarInvoice" aria-expanded="false" aria-controls="sidebarInvoice" class="side-nav-link">
-                            <span class="menu-icon"><i class="ti ti-file-invoice"></i></span>
-                            <span class="menu-text"> Grados Academicos</span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarInvoice">
-                            <ul class="sub-menu">
-                                <li class="side-nav-item">
-                                    <a href="GradosPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Grados</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="CarrerasPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Carreras</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="EstudiantesPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Estudiantes</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a href="DocentesPage.aspx" class="side-nav-link">
+                        <a href="#" class="side-nav-link">
                             <span class="menu-icon"><i class="ti ti-forms"></i></span>
                             <span class="menu-text">Docentes </span>
-                        </a>
-                    </li>
-
-                    <li class="side-nav-title mt-2">Pruebas dev</li>
-
-                    <li class="side-nav-item">
-                        <a href="ReportesPage.aspx" class="side-nav-link">
-                            <span class="menu-icon"><i class="ti ti-forms"></i></span>
-                            <span class="menu-text"> Formularios Pro </span>
                         </a>
                     </li>
                 </ul>
@@ -170,13 +107,13 @@
                     <!-- Brand Logo -->
                     <a href="#" class="logo">
                         <span class="logo-light">
-                            <span class="logo-lg"><img src="assets/images/logo.png" alt="logo"></span>
-                            <span class="logo-sm"><img src="assets/images/logo-sm.png" alt="small logo"></span>
+                            <span class="logo-lg"><img src="../assets/images/logo.png" alt="logo"></span>
+                            <span class="logo-sm"><img src="../assets/images/logo-sm.png" alt="small logo"></span>
                         </span>
 
                         <span class="logo-dark">
-                            <span class="logo-lg"><img src="assets/images/logo-dark.png" alt="dark logo"></span>
-                            <span class="logo-sm"><img src="assets/images/logo-sm.png" alt="small logo"></span>
+                            <span class="logo-lg"><img src="../assets/images/logo-dark.png" alt="dark logo"></span>
+                            <span class="logo-sm"><img src="../assets/images/logo-sm.png" alt="small logo"></span>
                         </span>
                     </a>
 
@@ -189,13 +126,6 @@
                     <button class="topnav-toggle-button" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                         <i class="ti ti-menu-deep fs-22"></i>
                     </button>
-
-                    <!-- Button Trigger Search Modal -->
-                    <!-- <div class="topbar-search text-muted d-none d-xl-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#searchModal" type="button">
-                        <i class="ti ti-search fs-18"></i>
-                        <span class="me-2">Search something..</span>
-                        <button type="submit" class="ms-auto btn btn-sm btn-primary shadow-none">⌘K</span>
-                    </div> -->
 
                 </div>
 
@@ -219,9 +149,9 @@
                     <div class="topbar-item">
                         <div class="dropdown">
                             <a class="topbar-link btn btn-outline-primary dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown" data-bs-offset="0,22" type="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/users/avatar-1.jpg" id="imgAdmins" width="24" class="rounded-circle me-lg-2 d-flex" alt="user-image">
-                                <span id="txtApellidosAdm" class="d-lg-flex flex-column gap-1 d-none">
-                                    Usuario.
+                                <img src="../assets/images/users/avatar-1.jpg" width="24" class="rounded-circle me-lg-2 d-flex" alt="user-image">
+                                <span class="d-lg-flex flex-column gap-1 d-none">
+                                    Dhanoo K.
                                 </span>
                                 <i class="ti ti-chevron-down d-none d-lg-block align-middle ms-2"></i>
                             </a>
@@ -572,15 +502,13 @@
     </div>
 
     <!-- Vendor js -->
-    <script src="assets/js/vendor.min.js"></script>
+    <script src="../assets/js/vendor.min.js"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.js"></script>
+    <script src="../assets/js/app.js"></script>
     <!-- Sweet Alerts js assets/vendor/toastr/toastr.min.css -->
-    <script src="assets/vendor/sweetalert2/sweetalert2.min.js"></script>
-    <script src="assets/vendor/loadingoverlay/loadingoverlay.min.js"></script>
-
-    <script src="js/Masterpa.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
+    <script src="../assets/vendor/sweetalert2/sweetalert2.min.js"></script>
+    <script src="../assets/vendor/loadingoverlay/loadingoverlay.min.js"></script>
 
 
     <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>

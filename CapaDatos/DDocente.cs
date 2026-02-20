@@ -212,5 +212,64 @@ namespace CapaDatos
                 };
             }
         }
+
+        public Respuesta<EDocente> LoginDocente(string Correo)
+        {
+            try
+            {
+                EDocente obj = null;
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_LoginDocente", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@Correo", Correo);
+
+                        con.Open();
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                obj = new EDocente
+                                {
+                                    IdDocente = Convert.ToInt32(dr["IdDocente"]),
+                                    // Validamos nulos para textos
+                                    Nombres = dr["Nombres"].ToString(),
+                                    Apellidos = dr["Apellidos"].ToString(),
+                                    NroCi = dr["NroCi"] != DBNull.Value ? dr["NroCi"].ToString() : string.Empty,
+                                    Correo = dr["Correo"].ToString(),
+                                    Celular = dr["Celular"] != DBNull.Value ? dr["Celular"].ToString() : string.Empty,
+                                    // La clave hash NUNCA debe ser nula, pero por seguridad:
+                                    ClaveHash = dr["ClaveHash"].ToString(),
+                                    ImagenUrl = dr["ImagenUrl"] != DBNull.Value ? dr["ImagenUrl"].ToString() : string.Empty,
+                                    Profesion = dr["Profesion"] != DBNull.Value ? dr["Profesion"].ToString() : string.Empty,
+                                    Estado = Convert.ToBoolean(dr["Estado"])
+                                };
+                            }
+                        }
+                    }
+                }
+
+                // Si obj es null, es que el correo no existe
+                return new Respuesta<EDocente>
+                {
+                    Estado = obj != null,
+                    Data = obj,
+                    // Es buena práctica de seguridad decir "Credenciales incorrectas" y no "Correo no existe"
+                    Mensaje = obj != null ? "Docente encontrado" : "Credenciales incorrectas"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<EDocente>
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
     }
 }

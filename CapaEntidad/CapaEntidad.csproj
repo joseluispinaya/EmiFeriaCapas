@@ -52,6 +52,7 @@
     <Compile Include="EGrupoEstudiante.cs" />
     <Compile Include="ELineaInvest.cs" />
     <Compile Include="EProyecto.cs" />
+    <Compile Include="EUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProyectoReportDTO.cs" />
     <Compile Include="Respuesta.cs" />

@@ -221,5 +221,67 @@ namespace CapaDatos
                 };
             }
         }
+
+        public Respuesta<EEstudiante> LoginEstudiante(string Correo)
+        {
+            try
+            {
+                EEstudiante obj = null;
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_LoginEstudiante", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@Correo", Correo);
+
+                        con.Open();
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                obj = new EEstudiante
+                                {
+                                    IdEstudiante = Convert.ToInt32(dr["IdEstudiante"]),
+                                    // Validamos nulos para textos
+                                    Nombres = dr["Nombres"].ToString(),
+                                    Apellidos = dr["Apellidos"].ToString(),
+                                    NroCi = dr["NroCi"] != DBNull.Value ? dr["NroCi"].ToString() : string.Empty,
+                                    Codigo = dr["Codigo"] != DBNull.Value ? dr["Codigo"].ToString() : string.Empty,
+                                    Correo = dr["Correo"].ToString(),
+                                    Celular = dr["Celular"] != DBNull.Value ? dr["Celular"].ToString() : string.Empty,
+                                    // La clave hash NUNCA debe ser nula, pero por seguridad:
+                                    ClaveHash = dr["ClaveHash"].ToString(),
+                                    ImagenEstUrl = dr["ImagenEstUrl"] != DBNull.Value ? dr["ImagenEstUrl"].ToString() : string.Empty,
+
+                                    IdCarrera = Convert.ToInt32(dr["IdCarrera"]),
+                                    Estado = Convert.ToBoolean(dr["Estado"]),
+                                    NombreCarrera = dr["NombreCarrera"].ToString()
+                                };
+                            }
+                        }
+                    }
+                }
+
+                // Si obj es null, es que el correo no existe
+                return new Respuesta<EEstudiante>
+                {
+                    Estado = obj != null,
+                    Data = obj,
+                    // Es buena práctica de seguridad decir "Credenciales incorrectas" y no "Correo no existe"
+                    Mensaje = obj != null ? "Estudiante encontrado" : "Credenciales incorrectas"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<EEstudiante>
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
     }
 }

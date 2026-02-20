@@ -2864,6 +2864,7 @@
     <Content Include="FeriasPage.aspx" />
     <Content Include="GradosPage.aspx" />
     <Content Include="ImagenesDoce\muchapp.png" />
+    <Content Include="Imagenes\adminImg.png" />
     <Content Include="Imagenes\sinimagen.png" />
     <Content Include="Inicio.aspx" />
     <Content Include="js\AreasPage.js" />
@@ -2875,10 +2876,14 @@
     <Content Include="js\GradosPage.js" />
     <Content Include="js\Inicio.js" />
     <Content Include="js\LineasPage.js" />
+    <Content Include="js\Login.js" />
     <Content Include="js\Masterpa.js" />
     <Content Include="js\ReporteProyecto.js" />
     <Content Include="js\ReportesPage.js" />
     <Content Include="LineasPage.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="MasterDocente\InicioDocente.aspx" />
+    <Content Include="MasterEstudiante\InicioEst.aspx" />
     <Content Include="ReporteProyecto.aspx" />
     <Content Include="ReportesPage.aspx" />
     <Content Include="Web.config" />
@@ -2946,6 +2951,41 @@
     </Compile>
     <Compile Include="LineasPage.aspx.designer.cs">
       <DependentUpon>LineasPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDocente\DocenteHo.Master.cs">
+      <DependentUpon>DocenteHo.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterDocente\DocenteHo.Master.designer.cs">
+      <DependentUpon>DocenteHo.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDocente\InicioDocente.aspx.cs">
+      <DependentUpon>InicioDocente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterDocente\InicioDocente.aspx.designer.cs">
+      <DependentUpon>InicioDocente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEstudiante\EstHome.Master.cs">
+      <DependentUpon>EstHome.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEstudiante\EstHome.Master.designer.cs">
+      <DependentUpon>EstHome.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEstudiante\InicioEst.aspx.cs">
+      <DependentUpon>InicioEst.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEstudiante\InicioEst.aspx.designer.cs">
+      <DependentUpon>InicioEst.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageHome.Master.cs">
       <DependentUpon>PageHome.Master</DependentUpon>
@@ -3032,6 +3072,8 @@
     <Content Include="assets\vendor\gmaps\umd.hbs" />
     <Content Include="assets\vendor\gmaps\yarn-error.log" />
     <Content Include="assets\vendor\wnumb\LICENSE.MD" />
+    <Content Include="MasterDocente\DocenteHo.Master" />
+    <Content Include="MasterEstudiante\EstHome.Master" />
     <None Include="packages.config" />
     <Content Include="PageHome.Master" />
     <None Include="Web.Debug.config">

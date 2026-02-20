@@ -11,7 +11,21 @@ namespace CapaPresentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Response.AppendHeader("Cache-Control", "no-store");
+            // 1. Validar que exista sesión
+            if (Session["UsuarioLogueado"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
 
+            // 2. VALIDAR QUE SEA DOCENTE (Aquí es donde usas la variable)
+            if (Session["TipoUsuario"].ToString() != "Admin")
+            {
+                // Si es estudiante intentando entrar a zona docente, lo botamos
+                Session.Abandon();
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }
