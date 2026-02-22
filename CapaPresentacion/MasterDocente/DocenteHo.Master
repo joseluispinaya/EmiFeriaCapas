@@ -149,9 +149,9 @@
                     <div class="topbar-item">
                         <div class="dropdown">
                             <a class="topbar-link btn btn-outline-primary dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown" data-bs-offset="0,22" type="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../assets/images/users/avatar-1.jpg" width="24" class="rounded-circle me-lg-2 d-flex" alt="user-image">
-                                <span class="d-lg-flex flex-column gap-1 d-none">
-                                    Dhanoo K.
+                                <img src="../assets/images/users/avatar-1.jpg" id="imgMaDoce" width="24" class="rounded-circle me-lg-2 d-flex" alt="user-image">
+                                <span id="txtApellidosDoce" class="d-lg-flex flex-column gap-1 d-none">
+                                    Docente
                                 </span>
                                 <i class="ti ti-chevron-down d-none d-lg-block align-middle ms-2"></i>
                             </a>
@@ -509,6 +509,7 @@
     <!-- Sweet Alerts js assets/vendor/toastr/toastr.min.css -->
     <script src="../assets/vendor/sweetalert2/sweetalert2.min.js"></script>
     <script src="../assets/vendor/loadingoverlay/loadingoverlay.min.js"></script>
+    <script src="jsDoce/MasterDoce.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
 
 
     <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>

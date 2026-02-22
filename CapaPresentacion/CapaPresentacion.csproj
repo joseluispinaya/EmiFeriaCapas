@@ -2883,7 +2883,12 @@
     <Content Include="LineasPage.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MasterDocente\InicioDocente.aspx" />
+    <Content Include="MasterDocente\jsDoce\MasterDoce.js" />
     <Content Include="MasterEstudiante\InicioEst.aspx" />
+    <Content Include="MasterEstudiante\InscripcionPage.aspx" />
+    <Content Include="MasterEstudiante\jsEst\InicioEst.js" />
+    <Content Include="MasterEstudiante\jsEst\InscripcionPage.js" />
+    <Content Include="MasterEstudiante\jsEst\MasterEst.js" />
     <Content Include="ReporteProyecto.aspx" />
     <Content Include="ReportesPage.aspx" />
     <Content Include="Web.config" />
@@ -2986,6 +2991,13 @@
     </Compile>
     <Compile Include="MasterEstudiante\InicioEst.aspx.designer.cs">
       <DependentUpon>InicioEst.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEstudiante\InscripcionPage.aspx.cs">
+      <DependentUpon>InscripcionPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEstudiante\InscripcionPage.aspx.designer.cs">
+      <DependentUpon>InscripcionPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageHome.Master.cs">
       <DependentUpon>PageHome.Master</DependentUpon>

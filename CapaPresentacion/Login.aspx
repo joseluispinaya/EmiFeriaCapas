@@ -43,12 +43,12 @@
                     <div class="text-start mb-3">
                         <div class="mb-3">
                             <label class="form-label" for="txtCorreo">Correo</label>
-                            <input type="email" id="txtCorreo" name="Correo" class="form-control" placeholder="Ingrese su correo">
+                            <input type="email" id="txtCorreo" name="Correo" class="form-control" placeholder="Ingrese su correo" value="lucasmp@yopmail.com">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label" for="txtClave">Contraseña</label>
-                            <input type="password" id="txtClave" class="form-control" placeholder="Ingrese su contraseña">
+                            <input type="password" id="txtClave" class="form-control" placeholder="Ingrese su contraseña" value="12131415">
                         </div>
 
                         <div class="mb-3">

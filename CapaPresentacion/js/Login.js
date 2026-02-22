@@ -44,6 +44,16 @@ $('#btnIniciar').on('click', function () {
         return;
     }
 
+    if ($("#cboRol").val() === "") {
+        ToastLogin.fire({
+            icon: 'warning',
+            title: 'Debe seleccionar un rol'
+        });
+
+        habilitarBoton();
+        return;
+    }
+
     const rol = parseInt($("#cboRol").val());
 
     // Configuración según el rol seleccionado

@@ -46,7 +46,7 @@ function CargarDatos(idProyecto) {
 
                 $("#lblFecha").text(data.FechaRegistroSt);
 
-                $("#lblEstado").text(data.Estado ? "Activo" : "Inactivo");
+                //$("#lblEstado").text(data.Estado ? "Activo" : "Inactivo");
 
                 // 2. Llenar Área y Categoría FechaRegistroSt
                 $("#lblArea").text(data.AreaInvestigacion);
@@ -68,7 +68,7 @@ function CargarDatos(idProyecto) {
                         let fila = `<tr>
                                         <td>${index + 1}</td>
                                         <td><img src="${imgUrl}" style="height:40px; width:40px; border-radius:50%; object-fit:cover;"/></td>
-                                        <td><strong>${est.EstudianteNombreCompleto}</strong></td>
+                                        <td>${est.EstudianteNombreCompleto}</td>
                                         <td>${est.NroCi}</td>
                                         <td>${est.Codigo}</td>
                                     </tr>`;

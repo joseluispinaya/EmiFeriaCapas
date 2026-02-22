@@ -23,6 +23,7 @@ namespace CapaPresentacion
             if (Session["TipoUsuario"].ToString() != "Admin")
             {
                 // Si es estudiante intentando entrar a zona docente, lo botamos
+                Session.Clear();
                 Session.Abandon();
                 Response.Redirect("~/Login.aspx");
             }
