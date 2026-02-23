@@ -63,6 +63,7 @@ namespace CapaPresentacion
             }
         }
 
+        // no eliminar este metodo, se usa para mostrar el detalle del proyecto en el reporte
         [WebMethod]
         public static Respuesta<ProyectoReportDTO> ObtenerDetalleReporteProyecto(int IdProyecto)
         {

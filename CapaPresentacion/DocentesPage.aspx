@@ -3,6 +3,14 @@
     <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendor/datatables/extensiones/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendor/datatables/extensiones/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .doce-perfil {
+            width: 125px;
+            height: 125px;
+            object-fit: cover; /* Evita que la imagen se estire o aplaste */
+            object-position: center; /* Asegura que se vea el centro de la foto */
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div class="row">
@@ -84,7 +92,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="text-center mb-2">
-                                <img src="Imagenes/sinimagen.png" id="imgDocente" alt="image" class="img-fluid rounded-circle" width="125" />
+                                <img src="Imagenes/sinimagen.png" id="imgDocente" alt="image" class="img-fluid rounded-circle doce-perfil" />
                             </div>
                             <div class="mb-2">
                                 <label for="cboEstado" class="form-label">Select Estado</label>

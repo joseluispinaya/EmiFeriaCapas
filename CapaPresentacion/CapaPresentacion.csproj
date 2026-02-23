@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AreasPage.aspx" />
+    <Content Include="AsignacionJurados.aspx" />
     <Content Include="assets\css\app-rtl.css" />
     <Content Include="assets\css\app-rtl.min.css" />
     <Content Include="assets\css\app.css" />
@@ -2868,6 +2869,7 @@
     <Content Include="Imagenes\sinimagen.png" />
     <Content Include="Inicio.aspx" />
     <Content Include="js\AreasPage.js" />
+    <Content Include="js\AsignacionJurados.js" />
     <Content Include="js\CarrerasPage.js" />
     <Content Include="js\CategoriasPage.js" />
     <Content Include="js\DocentesPage.js" />
@@ -2878,17 +2880,25 @@
     <Content Include="js\LineasPage.js" />
     <Content Include="js\Login.js" />
     <Content Include="js\Masterpa.js" />
+    <Content Include="js\ProyectosFePage.js" />
     <Content Include="js\ReporteProyecto.js" />
     <Content Include="js\ReportesPage.js" />
     <Content Include="LineasPage.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MasterDocente\InicioDocente.aspx" />
     <Content Include="MasterDocente\jsDoce\MasterDoce.js" />
+    <Content Include="MasterEstudiante\DetalleProyecto.aspx" />
     <Content Include="MasterEstudiante\InicioEst.aspx" />
     <Content Include="MasterEstudiante\InscripcionPage.aspx" />
+    <Content Include="MasterEstudiante\jsEst\DetalleProyecto.js" />
     <Content Include="MasterEstudiante\jsEst\InicioEst.js" />
     <Content Include="MasterEstudiante\jsEst\InscripcionPage.js" />
     <Content Include="MasterEstudiante\jsEst\MasterEst.js" />
+    <Content Include="MasterEstudiante\jsEst\ProyectosPage.js" />
+    <Content Include="MasterEstudiante\jsEst\ReporteInscripcion.js" />
+    <Content Include="MasterEstudiante\ProyectosPage.aspx" />
+    <Content Include="MasterEstudiante\ReporteInscripcion.aspx" />
+    <Content Include="ProyectosFePage.aspx" />
     <Content Include="ReporteProyecto.aspx" />
     <Content Include="ReportesPage.aspx" />
     <Content Include="Web.config" />
@@ -2900,6 +2910,13 @@
     </Compile>
     <Compile Include="AreasPage.aspx.designer.cs">
       <DependentUpon>AreasPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AsignacionJurados.aspx.cs">
+      <DependentUpon>AsignacionJurados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AsignacionJurados.aspx.designer.cs">
+      <DependentUpon>AsignacionJurados.aspx</DependentUpon>
     </Compile>
     <Compile Include="CarrerasPage.aspx.cs">
       <DependentUpon>CarrerasPage.aspx</DependentUpon>
@@ -2978,6 +2995,13 @@
     <Compile Include="MasterDocente\InicioDocente.aspx.designer.cs">
       <DependentUpon>InicioDocente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterEstudiante\DetalleProyecto.aspx.cs">
+      <DependentUpon>DetalleProyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEstudiante\DetalleProyecto.aspx.designer.cs">
+      <DependentUpon>DetalleProyecto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterEstudiante\EstHome.Master.cs">
       <DependentUpon>EstHome.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2999,6 +3023,20 @@
     <Compile Include="MasterEstudiante\InscripcionPage.aspx.designer.cs">
       <DependentUpon>InscripcionPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterEstudiante\ProyectosPage.aspx.cs">
+      <DependentUpon>ProyectosPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEstudiante\ProyectosPage.aspx.designer.cs">
+      <DependentUpon>ProyectosPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEstudiante\ReporteInscripcion.aspx.cs">
+      <DependentUpon>ReporteInscripcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterEstudiante\ReporteInscripcion.aspx.designer.cs">
+      <DependentUpon>ReporteInscripcion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PageHome.Master.cs">
       <DependentUpon>PageHome.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3007,6 +3045,13 @@
       <DependentUpon>PageHome.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProyectosFePage.aspx.cs">
+      <DependentUpon>ProyectosFePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProyectosFePage.aspx.designer.cs">
+      <DependentUpon>ProyectosFePage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteProyecto.aspx.cs">
       <DependentUpon>ReporteProyecto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,12 +1,39 @@
 ﻿
 let EstudiantesSeleccionados = [];
 
+//$(document).ready(function () {
+//    $("#CboLinea").prop("disabled", true);
+//    cargarCategorias();
+//    cargarAreas();
+//    cargarBuscadorDocentes();
+//    cargarBuscadorEstudiantes();
+//});
+
 $(document).ready(function () {
-    $("#CboLinea").prop("disabled", true);
-    cargarCategorias();
-    cargarAreas();
-    cargarBuscadorDocentes();
-    cargarBuscadorEstudiantes();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const idFeria = urlParams.get('id');
+
+    if (idFeria !== null && idFeria.trim() !== "") {
+        $("#txtIdFeria").val(idFeria);
+        $("#CboLinea").prop("disabled", true);
+        cargarCategorias();
+        cargarAreas();
+        cargarBuscadorDocentes();
+        cargarBuscadorEstudiantes();
+    } else {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "No hay parámetro válido en la URL",
+            showConfirmButton: false,
+            timer: 2000
+        });
+
+        setTimeout(function () {
+            window.location.href = 'InicioEst.aspx';
+        }, 2200);
+    }
 });
 
 function cargarCategorias() {
@@ -341,11 +368,21 @@ $("#btnGuardar").on("click", function () {
     $('#btnGuardar').prop('disabled', true);
 
     let idTutor = $("#txtIdTutor").val();
+    let idFeria = $("#txtIdFeria").val().trim();
 
     if (idTutor === "0" || idTutor === "") {
         ToastMaster.fire({
             icon: 'warning',
             title: 'Debe buscar y seleccionar un Tutor'
+        });
+        habilitarBoton();
+        return;
+    }
+
+    if (idFeria === "0" || idFeria === "") {
+        ToastMaster.fire({
+            icon: 'warning',
+            title: 'Ocurrio un error retorne al inicio'
         });
         habilitarBoton();
         return;
@@ -420,17 +457,30 @@ $("#btnGuardar").on("click", function () {
                 const idProyecto = response.d.Data;
                 var url = 'ReporteInscripcion.aspx?id=' + idProyecto;
 
+                // Opción Recomendada: Preguntar al usuario
                 Swal.fire({
-                    icon: "success",
-                    title: "Felicidades....",
-                    text: response.d.Mensaje,
-                    showConfirmButton: false,
-                    timer: 2000
-                });
+                    title: '¡Registro Exitoso!',
+                    text: response.d.Mensaje + " ¿Desea ver la Ficha Técnica ahora?",
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#6c757d', // Color gris para "Cerrar"
+                    confirmButtonText: 'Sí, ver ficha',
+                    cancelButtonText: 'No, finalizar',
+                    allowOutsideClick: false // Obliga a elegir una opción
+                }).then((result) => {
 
-                 setTimeout(function () {
-                     window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
-                 }, 2200);
+                    // Acción 1: Si dice que SI
+                    if (result.isConfirmed) {
+                        window.open(url, 'Reporte', 'height=600,width=800,scrollbars=0,location=0,toolbar=0');
+
+                        window.location.href = "InicioEst.aspx";
+                    }
+                    // Acción 2: Si dice que NO (o cierra la alerta)
+                    else {
+                        window.location.href = "InicioEst.aspx";
+                    }
+                });
 
 
             } else {
@@ -451,7 +501,32 @@ $("#btnGuardar").on("click", function () {
 $("#btnImprimirr").on("click", function () {
 
     var url = 'ReporteInscripcion.aspx?id=' + 1;
-    window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+    // Opción Recomendada: Preguntar al usuario
+    Swal.fire({
+        title: '¡Registro Exitoso!',
+        text: "¿Desea ver la Ficha Técnica ahora?",
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#6c757d', // Color gris para "Cerrar"
+        confirmButtonText: 'Sí, ver ficha',
+        cancelButtonText: 'No, finalizar',
+        allowOutsideClick: false // Obliga a elegir una opción
+    }).then((result) => {
+
+        // Acción 1: Si dice que SI
+        if (result.isConfirmed) {
+            window.open(url, 'Reporte', 'height=600,width=800,scrollbars=0,location=0,toolbar=0');
+
+            // Opcional: Después de abrir el reporte, ¿qué haces con el formulario?
+            // Lo ideal es limpiarlo o redireccionar a la lista
+            window.location.href = "InicioEst.aspx";
+        }
+        // Acción 2: Si dice que NO (o cierra la alerta)
+        else {
+            window.location.href = "InicioEst.aspx";
+        }
+    });
 })
 
 // fin

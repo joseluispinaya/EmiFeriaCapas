@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CapaEntidad;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using CapaEntidad;
+using System.Xml.Linq;
 
 namespace CapaDatos
 {
@@ -154,5 +155,156 @@ namespace CapaDatos
                 };
             }
         }
+
+        public Respuesta<List<ProyectoResumenDTO>> ListarProyectosPorEstudiante(int idEstudiante)
+        {
+            try
+            {
+                List<ProyectoResumenDTO> rptLista = new List<ProyectoResumenDTO>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ListarProyectosPorEstudiante", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@IdEstudiante", idEstudiante);
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new ProyectoResumenDTO
+                                {
+                                    NombreFeria = dr["NombreFeria"].ToString(),
+                                    IdProyecto = Convert.ToInt32(dr["IdProyecto"]),
+                                    NombreProyecto = dr["NombreProyecto"].ToString(),
+                                    FechaRegistroSt = Convert.ToDateTime(dr["FechaRegistro"]).ToString("dd/MM/yyyy"),
+                                    FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"]),
+                                    Estado = Convert.ToBoolean(dr["Estado"])
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<ProyectoResumenDTO>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "Lista obtenidas correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<ProyectoResumenDTO>>()
+                {
+                    Estado = false,
+                    Mensaje = $"Error al obtener la lista: {ex.Message}",
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<List<ProyectoResumenDTO>> ListarProyectosPorFeria(int idFeria)
+        {
+            try
+            {
+                List<ProyectoResumenDTO> rptLista = new List<ProyectoResumenDTO>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ListarProyectosPorFeria", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@IdFeria", idFeria);
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new ProyectoResumenDTO
+                                {
+                                    IdProyecto = Convert.ToInt32(dr["IdProyecto"]),
+                                    NombreProyecto = dr["NombreProyecto"].ToString(),
+                                    Estado = Convert.ToBoolean(dr["TieneJurados"])
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<ProyectoResumenDTO>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "Lista obtenidas correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<ProyectoResumenDTO>>()
+                {
+                    Estado = false,
+                    Mensaje = $"Error al obtener la lista: {ex.Message}",
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<bool> RegistrarJurados(int idProyecto, List<EJuradoRequest> listaJurados)
+        {
+            var respuesta = new Respuesta<bool>();
+
+            try
+            {
+                // 1. Construir el XML
+                // Formato esperado: <Jurados><Docente Id="1" /><Docente Id="5" /></Jurados>
+                XElement juradosXml = new XElement("Jurados");
+
+                foreach (var item in listaJurados)
+                {
+                    juradosXml.Add(new XElement("Docente",
+                        new XAttribute("Id", item.IdDocente)
+                    ));
+                }
+
+                // 2. Conexión a BD
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarJurados", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@IdProyecto", idProyecto);
+                        cmd.Parameters.Add("@JuradosXml", SqlDbType.Xml).Value = juradosXml.ToString();
+
+                        // Parámetro de salida
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        bool resultado = Convert.ToBoolean(outputParam.Value);
+
+                        respuesta.Estado = resultado;
+                        respuesta.Mensaje = resultado ? "Jurados asignados correctamente." : "No se pudo realizar la asignación.";
+                        respuesta.Data = resultado;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta.Estado = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
+            }
+
+            return respuesta;
+        }
+
     }
 }

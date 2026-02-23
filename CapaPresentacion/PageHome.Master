@@ -86,6 +86,13 @@
                     </li>
 
                     <li class="side-nav-item">
+                        <a href="ProyectosFePage.aspx" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-file-invoice"></i></span>
+                            <span class="menu-text">Proyectos </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                             <span class="menu-icon"><i class="ti ti-files"></i></span>
                             <span class="menu-text"> Configuraciones </span>

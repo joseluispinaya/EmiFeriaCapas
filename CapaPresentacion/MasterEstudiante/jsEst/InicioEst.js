@@ -90,6 +90,7 @@ function registroProyecto(IdFeria) {
     //var url = 'InscripcionPage.aspx?id=' + encodeURIComponent(IdFeria);
     //window.location.href = url;
 
-    mostrarAlerta("¡Mensaje!", "Ver Detalle ID: " + IdFeria, "success", "btn btn-success");
-    //console.log("Ver Detalle de la propiedad con ID: " + IdPropiedad);
+    var url = 'InscripcionPage.aspx?id=' + IdFeria;
+    window.location.href = url;
+    //mostrarAlerta("¡Mensaje!", "Ver Detalle ID: " + IdFeria, "success", "btn btn-success");
 }

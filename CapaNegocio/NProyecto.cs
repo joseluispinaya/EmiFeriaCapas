@@ -31,5 +31,20 @@ namespace CapaNegocio
         {
             return DProyecto.GetInstance().ObtenerDetalleReporteProyecto(idProyecto);
         }
+
+        public Respuesta<List<ProyectoResumenDTO>> ListarProyectosPorEstudiante(int idEstudiante)
+        {
+            return DProyecto.GetInstance().ListarProyectosPorEstudiante(idEstudiante);
+        }
+
+        public Respuesta<List<ProyectoResumenDTO>> ListarProyectosPorFeria(int idFeria)
+        {
+            return DProyecto.GetInstance().ListarProyectosPorFeria(idFeria);
+        }
+
+        public Respuesta<bool> RegistrarJurados(int idProyecto, List<EJuradoRequest> listaJurados)
+        {
+            return DProyecto.GetInstance().RegistrarJurados(idProyecto, listaJurados);
+        }
     }
 }
