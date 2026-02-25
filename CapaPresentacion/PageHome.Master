@@ -137,13 +137,47 @@
                                         <span class="menu-text">Carreras</span>
                                     </a>
                                 </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-album"></i></span>
+                            <span class="menu-text"> Ajustes de Planilla </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarExtendedUI">
+                            <ul class="sub-menu">
                                 <li class="side-nav-item">
-                                    <a href="EstudiantesPage.aspx" class="side-nav-link">
-                                        <span class="menu-text">Estudiantes</span>
+                                    <a href="AspectosPage.aspx" class="side-nav-link">
+                                        <span class="menu-text">Aspectos</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="CriteriosPage.aspx" class="side-nav-link">
+                                        <span class="menu-text">Criterios</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="IndicadoresPage.aspx" class="side-nav-link">
+                                        <span class="menu-text">Indicadores</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="#" class="side-nav-link">
+                                        <span class="menu-text">Documentacion</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="EstudiantesPage.aspx" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-forms"></i></span>
+                            <span class="menu-text">Estudiantes </span>
+                        </a>
                     </li>
 
                     <li class="side-nav-item">

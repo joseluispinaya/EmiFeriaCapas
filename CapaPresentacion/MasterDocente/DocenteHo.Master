@@ -79,9 +79,9 @@
                     <li class="side-nav-title mt-2">Menu de la App</li>
 
                     <li class="side-nav-item">
-                        <a href="#" class="side-nav-link">
+                        <a href="ProyectosAsignados.aspx" class="side-nav-link">
                             <span class="menu-icon"><i class="ti ti-message-filled"></i></span>
-                            <span class="menu-text"> Convocatorias </span>
+                            <span class="menu-text"> Proyectos Asignados </span>
                         </a>
                     </li>
 

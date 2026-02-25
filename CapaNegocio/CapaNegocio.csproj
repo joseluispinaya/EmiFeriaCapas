@@ -42,12 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NAreaInvest.cs" />
+    <Compile Include="NAspecto.cs" />
     <Compile Include="NCarrera.cs" />
     <Compile Include="NCategoria.cs" />
+    <Compile Include="NCriterio.cs" />
     <Compile Include="NDocente.cs" />
     <Compile Include="NEstudiante.cs" />
     <Compile Include="NFeria.cs" />
     <Compile Include="NGradoAcademico.cs" />
+    <Compile Include="NIndicador.cs" />
     <Compile Include="NLineaInvest.cs" />
     <Compile Include="NProyecto.cs" />
     <Compile Include="NUsuarios.cs" />

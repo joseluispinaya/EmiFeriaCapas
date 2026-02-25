@@ -22,6 +22,7 @@ namespace CapaNegocio
             return instancia;
         }
         #endregion
+
         public Respuesta<List<EGradoAcademico>> ListaGradosAcademicos()
         {
             return DGradoAcademico.GetInstance().ListaGradosAcademicos();

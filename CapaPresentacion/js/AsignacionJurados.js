@@ -199,11 +199,11 @@ $("#cboBuscarDocente").on("select2:select", function (e) {
     // Comparamos el CI del input con el CI del docente seleccionado
     if (tutorCi === data.nroCi) {
         ToastMaster.fire({
-            icon: 'error', // Usamos error para que sea más enfático
+            icon: 'error',
             title: 'El Tutor del proyecto no puede ser asignado como Jurado.'
         });
-        $("#cboBuscarDocente").val(null).trigger("change"); // Limpiar selección
-        return false; // Detener ejecución
+        $("#cboBuscarDocente").val(null).trigger("change");
+        return false;
     }
 
     // A) Verificar si ya existe en el array

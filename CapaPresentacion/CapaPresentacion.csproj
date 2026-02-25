@@ -85,6 +85,7 @@
   <ItemGroup>
     <Content Include="AreasPage.aspx" />
     <Content Include="AsignacionJurados.aspx" />
+    <Content Include="AspectosPage.aspx" />
     <Content Include="assets\css\app-rtl.css" />
     <Content Include="assets\css\app-rtl.min.css" />
     <Content Include="assets\css\app.css" />
@@ -2860,6 +2861,7 @@
     <Content Include="assets\vendor\wnumb\wNumb.min.js" />
     <Content Include="CarrerasPage.aspx" />
     <Content Include="CategoriasPage.aspx" />
+    <Content Include="CriteriosPage.aspx" />
     <Content Include="DocentesPage.aspx" />
     <Content Include="EstudiantesPage.aspx" />
     <Content Include="FeriasPage.aspx" />
@@ -2867,15 +2869,19 @@
     <Content Include="ImagenesDoce\muchapp.png" />
     <Content Include="Imagenes\adminImg.png" />
     <Content Include="Imagenes\sinimagen.png" />
+    <Content Include="IndicadoresPage.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="js\AreasPage.js" />
     <Content Include="js\AsignacionJurados.js" />
+    <Content Include="js\AspectosPage.js" />
     <Content Include="js\CarrerasPage.js" />
     <Content Include="js\CategoriasPage.js" />
+    <Content Include="js\CriteriosPage.js" />
     <Content Include="js\DocentesPage.js" />
     <Content Include="js\EstudiantesPage.js" />
     <Content Include="js\FeriasPage.js" />
     <Content Include="js\GradosPage.js" />
+    <Content Include="js\IndicadoresPage.js" />
     <Content Include="js\Inicio.js" />
     <Content Include="js\LineasPage.js" />
     <Content Include="js\Login.js" />
@@ -2887,6 +2893,8 @@
     <Content Include="Login.aspx" />
     <Content Include="MasterDocente\InicioDocente.aspx" />
     <Content Include="MasterDocente\jsDoce\MasterDoce.js" />
+    <Content Include="MasterDocente\jsDoce\ProyectosAsignados.js" />
+    <Content Include="MasterDocente\ProyectosAsignados.aspx" />
     <Content Include="MasterEstudiante\DetalleProyecto.aspx" />
     <Content Include="MasterEstudiante\InicioEst.aspx" />
     <Content Include="MasterEstudiante\InscripcionPage.aspx" />
@@ -2918,6 +2926,13 @@
     <Compile Include="AsignacionJurados.aspx.designer.cs">
       <DependentUpon>AsignacionJurados.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AspectosPage.aspx.cs">
+      <DependentUpon>AspectosPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AspectosPage.aspx.designer.cs">
+      <DependentUpon>AspectosPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CarrerasPage.aspx.cs">
       <DependentUpon>CarrerasPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2931,6 +2946,13 @@
     </Compile>
     <Compile Include="CategoriasPage.aspx.designer.cs">
       <DependentUpon>CategoriasPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CriteriosPage.aspx.cs">
+      <DependentUpon>CriteriosPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CriteriosPage.aspx.designer.cs">
+      <DependentUpon>CriteriosPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="DocentesPage.aspx.cs">
       <DependentUpon>DocentesPage.aspx</DependentUpon>
@@ -2959,6 +2981,13 @@
     </Compile>
     <Compile Include="GradosPage.aspx.designer.cs">
       <DependentUpon>GradosPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IndicadoresPage.aspx.cs">
+      <DependentUpon>IndicadoresPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndicadoresPage.aspx.designer.cs">
+      <DependentUpon>IndicadoresPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
@@ -2994,6 +3023,13 @@
     </Compile>
     <Compile Include="MasterDocente\InicioDocente.aspx.designer.cs">
       <DependentUpon>InicioDocente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDocente\ProyectosAsignados.aspx.cs">
+      <DependentUpon>ProyectosAsignados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterDocente\ProyectosAsignados.aspx.designer.cs">
+      <DependentUpon>ProyectosAsignados.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterEstudiante\DetalleProyecto.aspx.cs">
       <DependentUpon>DetalleProyecto.aspx</DependentUpon>
