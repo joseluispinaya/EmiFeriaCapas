@@ -55,6 +55,7 @@ $("#cboFerias").on("change", function () {
 
 function listaProyectos(idFeria) {
 
+    // 1. Limpieza si ya existe la tabla
     if ($.fn.DataTable.isDataTable("#tbProyect")) {
         $("#tbProyect").DataTable().destroy();
         $('#tbProyect tbody').empty();
@@ -82,32 +83,43 @@ function listaProyectos(idFeria) {
                 }
             }
         },
-        // Definición de columnas del DataTable
         "columns": [
             { "data": "IdProyecto", "visible": false, "searchable": false },
             { "data": "NombreProyecto" },
             {
                 "data": "IdProyecto",
+                "className": "text-center", // Centramos el contenido de la celda
                 "render": function (data, type, row) {
 
-                    // Aquí usamos la nueva columna row.TieneJurados
+                    // --- BOTÓN 1: GESTIÓN (Asignar o Editar) ---
+                    let btnGestion = "";
 
-                    let claseBoton = "btn-primary";
-                    let icono = "ti ti-gavel"; // Icono de mazo/juez
-                    let accion = `asignarJurado(${data})`; // Acción normal
-
-                    // Si ya tiene jurados, cambiamos el comportamiento visual o la acción
                     if (row.Estado) {
-                        claseBoton = "btn-warning"; // Color de advertencia
-                        icono = "ti ti-eye"; // Icono de "Ver" en vez de asignar
-
-                        // Opción A: Bloquear la acción y mostrar alerta al hacer click
-                        accion = `mostrarAlertaJurados(${data})`;
+                        // CASO: Ya tiene jurados -> MODO EDICIÓN
+                        // Usamos btn-warning (Amarillo) y ti-pencil (Lápiz)
+                        // Llama a mostrarAlertaJurados (que ya tienes hecha)
+                        btnGestion = `<button type="button" class="btn btn-warning btn-sm" onclick="mostrarAlertaJurados(${data})" title="Editar Asignación">
+                                        <i class="ti ti-pencil"></i>
+                                      </button>`;
+                    } else {
+                        // CASO: Nuevo -> MODO ASIGNACIÓN
+                        // Usamos btn-primary (Azul) y ti-gavel (Mazo)
+                        // Llama a asignarJurado (que ya tienes hecha)
+                        btnGestion = `<button type="button" class="btn btn-primary btn-sm" onclick="asignarJurado(${data})" title="Asignar Jurados">
+                                        <i class="ti ti-gavel"></i>
+                                      </button>`;
                     }
 
-                    return `<button type="button" class="btn ${claseBoton} btn-sm" onclick="${accion}">
-                        <i class="${icono}"></i>
-                    </button>`;
+                    // --- BOTÓN 2: VER DETALLES (Siempre visible) ---
+                    // Usamos btn-info (Celeste) y ti-eye (Ojo)
+                    // Llama a verDetalleProyecto (Nueva función)
+                    // Agregamos 'ms-1' para separarlo un poquito del primer botón
+                    let btnDetalle = `<button type="button" class="btn btn-info btn-sm" onclick="verDetalleProyecto(${data})" title="Ver Detalles del Proyecto">
+                                        <i class="ti ti-eye"></i>
+                                      </button>`;
+
+                    // Devolvemos ambos botones juntos
+                    return `<div class="d-flex justify-content-center gap-2">${btnGestion}${btnDetalle}</div>`;
                 }
             }
         ],
@@ -121,8 +133,7 @@ function listaProyectos(idFeria) {
 function asignarJurado(idProyecto) {
     // Caso 1: Asignar nuevo (Pasamos false)
     window.location.href = 'AsignacionJurados.aspx?id=' + idProyecto + '&esEdicion=false';
-    //const textoSms = `Jurados para el id: ${idProyecto}.`;
-    //mostrarAlerta("¡Mensaje!", textoSms, "info", "btn btn-info");
+    
 }
 
 function mostrarAlertaJurados(idProyecto) {
@@ -141,5 +152,13 @@ function mostrarAlertaJurados(idProyecto) {
     });
 }
 
+// --- Agrega esta función al final de tu archivo JS ---
+function verDetalleProyecto(idProyecto) {
+    // Redirecciona a la página de resultados/detalles pasando el ID
+    // Asegúrate de cambiar 'ResultadosEvaPage.aspx' por el nombre real de tu página destino
+    window.location.href = 'ResultadosEvaPage.aspx?id=' + idProyecto;
+    //const textoSms = `Resultados para el id: ${idProyecto}.`;
+    //mostrarAlerta("¡Mensaje!", textoSms, "info", "btn btn-info");
+}
 
 // fin

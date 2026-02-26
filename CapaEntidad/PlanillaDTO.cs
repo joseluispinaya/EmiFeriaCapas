@@ -9,5 +9,6 @@
         public int IdIndicador { get; set; }
         public string IndicadorDesc { get; set; }
         public decimal PuntajeMaximo { get; set; }
+        public decimal PuntajeObtenido { get; set; }
     }
 }

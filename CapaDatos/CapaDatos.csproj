@@ -49,6 +49,7 @@
     <Compile Include="DCriterio.cs" />
     <Compile Include="DDocente.cs" />
     <Compile Include="DEstudiante.cs" />
+    <Compile Include="DEvaluacion.cs" />
     <Compile Include="DFeria.cs" />
     <Compile Include="DGradoAcademico.cs" />
     <Compile Include="DIndicador.cs" />

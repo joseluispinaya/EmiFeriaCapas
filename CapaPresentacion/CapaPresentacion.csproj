@@ -2889,9 +2889,12 @@
     <Content Include="js\ProyectosFePage.js" />
     <Content Include="js\ReporteProyecto.js" />
     <Content Include="js\ReportesPage.js" />
+    <Content Include="js\ResultadosEvaPage.js" />
     <Content Include="LineasPage.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MasterDocente\EvaluacionPage.aspx" />
     <Content Include="MasterDocente\InicioDocente.aspx" />
+    <Content Include="MasterDocente\jsDoce\EvaluacionPage.js" />
     <Content Include="MasterDocente\jsDoce\MasterDoce.js" />
     <Content Include="MasterDocente\jsDoce\ProyectosAsignados.js" />
     <Content Include="MasterDocente\ProyectosAsignados.aspx" />
@@ -2909,6 +2912,7 @@
     <Content Include="ProyectosFePage.aspx" />
     <Content Include="ReporteProyecto.aspx" />
     <Content Include="ReportesPage.aspx" />
+    <Content Include="ResultadosEvaPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3017,6 +3021,13 @@
     <Compile Include="MasterDocente\DocenteHo.Master.designer.cs">
       <DependentUpon>DocenteHo.Master</DependentUpon>
     </Compile>
+    <Compile Include="MasterDocente\EvaluacionPage.aspx.cs">
+      <DependentUpon>EvaluacionPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterDocente\EvaluacionPage.aspx.designer.cs">
+      <DependentUpon>EvaluacionPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterDocente\InicioDocente.aspx.cs">
       <DependentUpon>InicioDocente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3101,6 +3112,13 @@
     </Compile>
     <Compile Include="ReportesPage.aspx.designer.cs">
       <DependentUpon>ReportesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResultadosEvaPage.aspx.cs">
+      <DependentUpon>ResultadosEvaPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResultadosEvaPage.aspx.designer.cs">
+      <DependentUpon>ResultadosEvaPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utilidadesj.cs" />
   </ItemGroup>

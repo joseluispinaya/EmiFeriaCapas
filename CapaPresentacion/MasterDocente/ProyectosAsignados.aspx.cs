@@ -17,6 +17,29 @@ namespace CapaPresentacion.MasterDocente
 
         }
 
+        [WebMethod(EnableSession = true)]
+        public static Respuesta<List<ProyectoResumenDTO>> MisProyectosJurado()
+        {
+            // 1. Validar Sesión
+            if (HttpContext.Current.Session["UsuarioLogueado"] == null)
+            {
+                return new Respuesta<List<ProyectoResumenDTO>> { Estado = false, Mensaje = "Su sesión ha expirado. Recargue la página." };
+            }
+
+            try
+            {
+                // 3. Obtener el ID del Docente de la sesión (Seguro)
+                EDocente doce = (EDocente)HttpContext.Current.Session["UsuarioLogueado"];
+
+                return NProyecto.GetInstance().ProyectosAsignadosJurado(doce.IdDocente);
+            }
+            catch (Exception ex)
+            {
+                // Captura cualquier error no previsto en la capa de presentación
+                return new Respuesta<List<ProyectoResumenDTO>> { Estado = false, Mensaje = "Ocurrió un error inesperado: " + ex.Message };
+            }
+        }
+
         [WebMethod]
         public static Respuesta<List<PlanillaDTO>> ObtenerRubricaCompleta()
         {

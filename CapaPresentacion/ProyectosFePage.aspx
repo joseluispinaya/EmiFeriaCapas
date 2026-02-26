@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Proyectos</th>
+                                <th>Titulos de Proyectos</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
