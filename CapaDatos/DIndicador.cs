@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CapaEntidad;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using CapaEntidad;
+using System.Xml.Linq;
 
 namespace CapaDatos
 {
@@ -208,6 +209,57 @@ namespace CapaDatos
                     Data = null
                 };
             }
+        }
+
+        public Respuesta<bool> RegistrarEvaluacion(EEvaluacionRequest evaluacion, int idDocenteSesion)
+        {
+            var response = new Respuesta<bool>();
+
+            try
+            {
+                // Convertir lista a XML
+                XElement detallesXml = new XElement("Detalles");
+                foreach (var item in evaluacion.Detalles)
+                {
+                    detallesXml.Add(new XElement("Detalle",
+                        new XAttribute("IdIndicador", item.IdIndicador),
+                        new XAttribute("Puntaje", item.PuntajeObtenido)
+                    ));
+                }
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_GuardarEvaluacion", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@IdProyecto", evaluacion.IdProyecto);
+                        cmd.Parameters.AddWithValue("@IdDocente", idDocenteSesion); // Desde Session
+                        cmd.Parameters.AddWithValue("@Observaciones", evaluacion.Observaciones ?? "");
+                        cmd.Parameters.AddWithValue("@Finalizado", evaluacion.Finalizado);
+                        cmd.Parameters.Add("@DetallesXml", SqlDbType.Xml).Value = detallesXml.ToString();
+
+                        // Parámetros de Salida
+                        cmd.Parameters.Add("@Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@Mensaje", SqlDbType.NVarChar, 500).Direction = ParameterDirection.Output;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        bool resultado = Convert.ToBoolean(cmd.Parameters["@Resultado"].Value);
+                        string mensaje = cmd.Parameters["@Mensaje"].Value.ToString();
+
+                        response.Estado = resultado;
+                        response.Mensaje = mensaje;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+
+            return response;
         }
 
     }

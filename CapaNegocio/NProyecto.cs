@@ -46,5 +46,10 @@ namespace CapaNegocio
         {
             return DProyecto.GetInstance().RegistrarJurados(idProyecto, listaJurados);
         }
+
+        public Respuesta<List<ProyectoResumenDTO>> ProyectosAsignadosJurado(int idDocente)
+        {
+            return DProyecto.GetInstance().ProyectosAsignadosJurado(idDocente);
+        }
     }
 }

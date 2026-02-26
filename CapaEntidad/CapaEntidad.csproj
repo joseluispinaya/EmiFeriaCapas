@@ -46,6 +46,7 @@
     <Compile Include="ECarrera.cs" />
     <Compile Include="ECategoria.cs" />
     <Compile Include="ECriterio.cs" />
+    <Compile Include="EDetalleEvaluacion.cs" />
     <Compile Include="EDocente.cs" />
     <Compile Include="EEstudiante.cs" />
     <Compile Include="EEstudiantesDTO.cs" />

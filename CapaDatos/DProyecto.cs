@@ -306,5 +306,55 @@ namespace CapaDatos
             return respuesta;
         }
 
+        public Respuesta<List<ProyectoResumenDTO>> ProyectosAsignadosJurado(int idDocente)
+        {
+            try
+            {
+                List<ProyectoResumenDTO> rptLista = new List<ProyectoResumenDTO>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ProyectosAsignadosJurado", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@IdDocente", idDocente);
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new ProyectoResumenDTO
+                                {
+                                    NombreFeria = dr["NombreFeria"].ToString(),
+                                    IdProyecto = Convert.ToInt32(dr["IdProyecto"]),
+                                    NombreProyecto = dr["NombreProyecto"].ToString(),
+                                    FechaRegistroSt = Convert.ToDateTime(dr["FechaRegistro"]).ToString("dd/MM/yyyy"),
+                                    FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"]),
+                                    Estado = Convert.ToBoolean(dr["Estado"])
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<ProyectoResumenDTO>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "Lista obtenidas correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<ProyectoResumenDTO>>()
+                {
+                    Estado = false,
+                    Mensaje = $"Error al obtener la lista: {ex.Message}",
+                    Data = null
+                };
+            }
+        }
+
     }
 }

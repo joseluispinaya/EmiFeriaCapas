@@ -42,5 +42,10 @@ namespace CapaNegocio
         {
             return DIndicador.GetInstance().ObtenerRubricaCompleta();
         }
+
+        public Respuesta<bool> RegistrarEvaluacion(EEvaluacionRequest evaluacion, int idDocenteSesion)
+        {
+            return DIndicador.GetInstance().RegistrarEvaluacion(evaluacion, idDocenteSesion);
+        }
     }
 }
