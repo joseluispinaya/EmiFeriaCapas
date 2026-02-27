@@ -1,4 +1,7 @@
 ﻿
+// Variable global para guardar el estado
+let evaluacionCompletada = false;
+
 $(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -20,9 +23,57 @@ $(document).ready(function () {
     } else {
         $("#txtIdProyecto").val(idProyecto);
         cargarInfoProyecto(idProyecto);
-        cargarRubricaEvaluacion();
+        //validarEvaluado(idProyecto);
+        validarEvaluadoBackend(idProyecto);
     }
 });
+
+function validarEvaluadoBackend(idProyecto) {
+    var request = { IdProyecto: parseInt(idProyecto) };
+
+    $.LoadingOverlay("show");
+
+    $.ajax({
+        type: "POST",
+        url: "EvaluacionPage.aspx/ValidarEvaluacion",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            $.LoadingOverlay("hide");
+
+            if (response.d.Estado) {
+
+                if (response.d.Data) {
+                    // CASO A: EL DOCENTE YA EVALUÓ EL PROYECTO
+                    evaluacionCompletada = true;
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Proyecto ya evaluado',
+                        text: response.d.Mensaje,
+                        confirmButtonText: 'Ver mi evaluación'
+                    });
+                    // 1. Ocultar el botón de "Finalizar Evaluación"
+                    $("#btnFinalizarEvaluacion").hide();
+                    // 2. Ocultar el textarea de observaciones (o bloquearlo)
+                    $("#txtObservaciones").prop("disabled", true);
+                    $("#contenedorAspectos").hide();
+                } else {
+                    // CASO B: HAY OTROS JURADOS QUE EVALUARON, PERO ESTE NO
+                    iniciarCalificacionNueva();
+                }
+
+            } else {
+                ToastMaster.fire({ icon: 'warning', title: response.d.Mensaje });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $.LoadingOverlay("hide");
+            console.log(xhr.responseText);
+            ToastMaster.fire({ icon: 'error', title: "Ocurrió un error al comunicarse con el servidor." });
+        }
+    });
+}
 
 function cargarInfoProyecto(idProyecto) {
     var request = { IdProyecto: parseInt(idProyecto) };
@@ -47,6 +98,8 @@ function cargarInfoProyecto(idProyecto) {
                 $("#lblTutorNombre").text(data.TutorNombreCompleto);
                 $("#lblTutorCorreo").text(data.TutorCorreo);
                 $("#imgDocente").attr("src", data.TutorImagen || "../Imagenes/sinimagen.png");
+
+                notaFinalProyecto(idProyecto);
 
                 // 4. Llenar Tabla
                 // 4. Llenar Tabla
@@ -113,6 +166,151 @@ function cargarInfoProyecto(idProyecto) {
             }, 2200);
         }
     });
+}
+
+function notaFinalProyecto(idProyecto) {
+    var request = { IdProyecto: parseInt(idProyecto) };
+
+    $.ajax({
+        type: "POST",
+        url: "/ResultadosEvaPage.aspx/ObtenerNotaFinalProyecto",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+
+            // 1. Limpiamos el contenedor por si se ejecuta varias veces
+            $("#rater2").html("");
+            $("#lblNotaNumerica").text("");
+            $("#lblEstadoCalificacion").text("");
+
+            if (response.d.Estado) {
+                const data = response.d.Data; // Aquí viene tu objeto
+
+                // data.NotaFinalPromedio viene ej: 85.50
+                // data.CantidadJuradosQueCalificaron ej: 3
+
+                if (data.NotaTotal > 0) {
+
+                    // A) CONVERSIÓN DE ESCALA (100 -> 5)
+                    let ratingEstrellas = data.NotaTotal / 20;
+
+                    // B) INICIALIZAR RATER-JS
+                    var myRater = raterJs({
+                        element: document.querySelector("#rater2"),
+                        starSize: 18, // Tamaño de la estrella en px
+                        rating: ratingEstrellas, // El valor calculado (ej: 4.2)
+                        max: 5,
+                        readOnly: true, // IMPORTANTE: Solo lectura, no se puede votar
+                        step: 0.1 // Permite medias estrellas o decimales
+                    });
+
+                    // C) MOSTRAR LA NOTA NUMÉRICA AL LADO
+                    $("#lblNotaNumerica").text(data.NotaTotal.toFixed(2) + " / 100");
+                    $("#lblEstadoCalificacion").text(`Basado en ${data.IdEvaluacion} jurado(s).`);
+
+                } else {
+                    mostrarSinCalificacion();
+                }
+
+            } else {
+                mostrarSinCalificacion();
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+            mostrarSinCalificacion();
+        }
+    });
+}
+
+function mostrarSinCalificacion() {
+    // Inicializamos el rater en 0 estrellas
+    var myRater = raterJs({
+        element: document.querySelector("#rater2"),
+        starSize: 18,
+        rating: 0,
+        max: 5,
+        readOnly: true
+    });
+
+    $("#lblNotaNumerica").text("0.00 / 100");
+    $("#lblEstadoCalificacion").text("Sin calificación registrada.");
+}
+
+function validarEvaluado(idProyecto) {
+    var request = { IdProyecto: parseInt(idProyecto) };
+
+    // Mostrar un loading mientras verificamos
+    $.LoadingOverlay("show");
+
+    $.ajax({
+        type: "POST",
+        url: "/ResultadosEvaPage.aspx/ListarNotasPorJurado",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            $.LoadingOverlay("hide");
+
+            if (response.d.Estado) {
+                const data = response.d.Data;
+                const usua = JSON.parse(sessionStorage.getItem('usuDocent'));
+
+                if (data && data.length > 0) {
+                    let evaluacionDocente = data.find(p => p.IdDocente == usua.IdDocente);
+
+                    if (evaluacionDocente) {
+                        // CASO A: EL DOCENTE YA EVALUÓ EL PROYECTO
+                        evaluacionCompletada = true;
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Proyecto ya evaluado',
+                            text: `Usted ya calificó este proyecto con una nota de ${evaluacionDocente.NotaTotal.toFixed(2)}/100.`,
+                            confirmButtonText: 'Ver mi evaluación'
+                        });
+
+                        // 1. Ocultar el botón de "Finalizar Evaluación"
+                        $("#btnFinalizarEvaluacion").hide();
+
+                        // 2. Ocultar el textarea de observaciones (o bloquearlo)
+                        $("#txtObservaciones").prop("disabled", true);
+
+                        $("#contenedorAspectos").hide();
+                    } else {
+                        // CASO B: HAY OTROS JURADOS QUE EVALUARON, PERO ESTE NO
+                        iniciarCalificacionNueva();
+                    }
+
+                } else {
+                    // CASO C: NADIE HA EVALUADO EL PROYECTO AÚN
+                    iniciarCalificacionNueva();
+                }
+
+            } else {
+                ToastMaster.fire({ icon: 'warning', title: response.d.Mensaje });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $.LoadingOverlay("hide");
+            console.log(xhr.responseText);
+            ToastMaster.fire({ icon: 'error', title: "Ocurrió un error al comunicarse con el servidor." });
+        }
+    });
+}
+
+function iniciarCalificacionNueva() {
+    ToastMaster.fire({
+        icon: 'success',
+        title: 'Modo Evaluación activado.'
+    });
+
+    // Mostramos los botones y cargamos la rúbrica limpia
+    $("#btnFinalizarEvaluacion").show();
+    $("#contenedorAspectos").show();
+    $("#txtObservaciones").prop("disabled", false);
+
+    cargarRubricaEvaluacion();
 }
 
 function cargarRubricaEvaluacion() {

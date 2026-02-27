@@ -32,10 +32,26 @@
                                 <input type="hidden" value="0" id="txtIdProyecto">
 
                                 <div class="row">
-                                    <div class="col-md-7">
-                                        <h5 class="mb-3 text-center">Titulo del Proyecto</h5>
-                                        <div class="mb-2">
-                                            <h5 id="lblNombreProyecto" class="text-dark fw-medium">.....</h5>
+                                    <div class="col-md-8">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h5 class="mb-2 text-center">Titulo del Proyecto</h5>
+                                                <div class="mb-3">
+                                                    <h5 id="lblNombreProyecto" class="text-dark fw-medium">.....</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5 class="mb-2 text-center">Calificacion</h5>
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div id="rater2"></div>
+
+                                                        <span id="lblNotaNumerica" class="ms-2 fw-bold text-dark fs-12"></span>
+                                                    </div>
+                                                    <small id="lblEstadoCalificacion" class="text-muted"></small>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <h5 class="mb-3 text-center">Informacion del Proyecto</h5>
@@ -45,8 +61,8 @@
                                         <p class="text-muted fw-medium fs-14 mb-1"><span class="text-dark">Linea Inv. : </span><span id="lblLinea">Cargando...</span></p>
                                         <p class="text-muted fw-medium fs-14 mb-1"><span class="text-dark">Categoria : </span><span id="lblCategoria">Cargando...</span></p>
                                     </div>
-                                    <div class="col-md-5">
-                                        <h5 class="text-dark fw-medium text-center">Datos del Tutor e Integrantes</h5>
+                                    <div class="col-md-4">
+                                        <h5 class="text-dark fw-medium text-center">Tutor e Integrantes</h5>
 
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="d-flex align-items-center justify-content-center">
@@ -81,16 +97,19 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="mt-4">
                             <label class="form-label" for="txtObservaciones">Observaciones</label>
                             <textarea class="form-control" id="txtObservaciones" placeholder="Observaciones del proyecto" rows="2"></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <div class="col-md-7 d-flex align-items-center justify-content-center">
                         <div class="d-flex gap-2 mt-4">
                             <button type="button" id="btnFinalizarEvaluacion" class="btn btn-success gap-1">
                                 <i class="ti ti-check fs-16"></i>Finalizar Evaluación
+                            </button>
+                            <button type="button" id="btnImprimirr" class="btn btn-primary gap-1">
+                                <i class="ti ti-printer fs-16"></i>Imprimir
                             </button>
                             <a href="ProyectosAsignados.aspx" class="btn btn-info gap-1">
                                 <i class="ti ti-arrow-badge-left fs-20"></i>Volver
@@ -115,5 +134,6 @@
 </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="server">
+    <script src="../assets/vendor/rater-js/index.js"></script>
     <script src="jsDoce/EvaluacionPage.js?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" type="text/javascript"></script>
 </asp:Content>

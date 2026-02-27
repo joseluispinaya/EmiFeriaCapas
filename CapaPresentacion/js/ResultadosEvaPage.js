@@ -146,7 +146,7 @@ function notaFinalProyecto(idProyecto) {
                     // B) INICIALIZAR RATER-JS
                     var myRater = raterJs({
                         element: document.querySelector("#rater2"),
-                        starSize: 20, // Tamaño de la estrella en px
+                        starSize: 18, // Tamaño de la estrella en px
                         rating: ratingEstrellas, // El valor calculado (ej: 4.2)
                         max: 5,
                         readOnly: true, // IMPORTANTE: Solo lectura, no se puede votar
@@ -177,7 +177,7 @@ function mostrarSinCalificacion() {
     // Inicializamos el rater en 0 estrellas
     var myRater = raterJs({
         element: document.querySelector("#rater2"),
-        starSize: 20,
+        starSize: 18,
         rating: 0,
         max: 5,
         readOnly: true
@@ -210,6 +210,8 @@ function cargarNotasJurados(idProyecto) {
                         // Validación de imagen
                         let imgUrl = est.ImagenUrl || "Imagenes/sinimagen.png";
 
+                        // Convertimos el objeto 'est' a string seguro para HTML
+                        let juradoJson = JSON.stringify(est).replace(/"/g, '&quot;');
                         // Construcción de la fila
                         htmlContent += `
                         <tr>
@@ -232,7 +234,8 @@ function cargarNotasJurados(idProyecto) {
                             </td>
                             <td class="align-middle">
                                 <button type="button" class="btn btn-soft-info btn-sm btn-ver-detalle" 
-                                    data-id-evaluacion="${est.IdEvaluacion}">
+                                    data-id-evaluacion="${est.IdEvaluacion}"
+                                    data-jurado="${juradoJson}">
                                     <i class="ti ti-eye me-1"></i> Ver Detalle
                                 </button>
                             </td>
@@ -270,11 +273,113 @@ function cargarNotasJurados(idProyecto) {
 // 2. Evento Click en "Ver Detalle"
 $(document).on('click', '.btn-ver-detalle', function () {
     let idEvaluacion = $(this).data("id-evaluacion");
-    //verDetalleEvaluacion(idEvaluacion);
 
-    const textoSms = `Detalles del Id Evaluacion: ${idEvaluacion}.`;
-    mostrarAlerta("¡Mensaje!", textoSms, "info", "btn btn-info");
+    // 2. Leemos el objeto completo desde el nuevo atributo
+    let objetoJuradoCompleto = $(this).data("jurado");
+    // Si quieres mostrar alguna info del jurado en el modal, ya la tienes aquí
+
+    //console.log("Datos completos del jurado seleccionado:", objetoJuradoCompleto);
+    $("#txtIdEvaluacion").val(idEvaluacion);
+    $("#txtJurado").val(objetoJuradoCompleto.NombreCompleto);
+    verDetalleEvaluacion(idEvaluacion);
+
+    //const textoSms = `Detalles del Id Evaluacion: ${idEvaluacion}.`;
+    //mostrarAlerta("¡Mensaje!", textoSms, "info", "btn btn-info");
 
 });
+
+// 3. Función para traer el detalle y pintar el acordeón
+function verDetalleEvaluacion(idEvaluacion) {
+    $.ajax({
+        url: "ResultadosEvaPage.aspx/VerDetalleEvaluacion",
+        type: "POST",
+        data: JSON.stringify({ IdEvaluacion: idEvaluacion }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response.d.Estado) {
+                renderizarAcordeonDetalle(response.d.Data);
+                $("#modalDetalleNota").modal("show");
+            }
+        }
+    });
+}
+
+// 4. Renderizar Acordeón (Modo Lectura)
+function renderizarAcordeonDetalle(listaDetalle) {
+    // Agrupar por Aspecto
+    let aspectosMap = {};
+    listaDetalle.forEach(item => {
+        if (!aspectosMap[item.IdAspecto]) {
+            aspectosMap[item.IdAspecto] = { nombre: item.NombreAspecto, indicadores: [] };
+        }
+        aspectosMap[item.IdAspecto].indicadores.push(item);
+    });
+
+    let htmlAcordeon = "";
+
+    for (const key in aspectosMap) {
+        let aspecto = aspectosMap[key];
+        let idCollapse = `collapseDetalle${key}`;
+
+        // Calculamos el subtotal de este aspecto para mostrarlo en el título
+        let subtotalAspecto = aspecto.indicadores.reduce((sum, i) => sum + i.PuntajeObtenido, 0);
+
+        htmlAcordeon += `
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${idCollapse}">
+                    ${aspecto.nombre} <span class="badge bg-primary ms-2">${subtotalAspecto.toFixed(2)} pts</span>
+                </button>
+            </h2>
+            <div id="${idCollapse}" class="accordion-collapse collapse" data-bs-parent="#accordionDetalle">
+                <div class="accordion-body">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Criterio</th>
+                                <th>Indicador</th>
+                                <th class="text-center">Max</th>
+                                <th class="text-center">Obtenido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${generarFilasDetalle(aspecto.indicadores)}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>`;
+    }
+    $("#contenedorDetalleAspectos").html(htmlAcordeon);
+}
+
+function generarFilasDetalle(indicadores) {
+    let html = "";
+    indicadores.forEach(ind => {
+        // Lógica de colores según nota
+        let colorNota = ind.PuntajeObtenido === ind.PuntajeMaximo ? "text-success" :
+            ind.PuntajeObtenido === 0 ? "text-danger" : "text-dark";
+
+        html += `<tr>
+            <td><small>${ind.NombreCriterio}</small></td>
+            <td>${ind.IndicadorDesc}</td>
+            <td class="text-center">${ind.PuntajeMaximo}</td>
+            <td class="text-center fw-bold ${colorNota}">${ind.PuntajeObtenido.toFixed(2)}</td>
+        </tr>`;
+    });
+    return html;
+}
+
+$("#btnReporte").on("click", function () {
+    //const idProyecto = $("#txtIdProyecto").val();
+    const tituloPro = $("#lblNombreProyecto").text();
+    const nombre = $("#txtJurado").val();
+    const tituloCodificado = encodeURIComponent(tituloPro);
+    const nombreCodificado = encodeURIComponent(nombre);
+    const idEvaluacion = $("#txtIdEvaluacion").val();
+    var url = `ReporteCalificacion.aspx?jurado=${nombreCodificado}&idEva=${idEvaluacion}&titulo=${tituloCodificado}`;
+    window.open(url, 'Reporte', 'height=600,width=800,scrollbars=0,location=0,toolbar=0');
+})
 
 // fin page

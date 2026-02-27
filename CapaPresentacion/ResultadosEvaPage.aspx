@@ -18,6 +18,8 @@
             <div class="card">
                 <div class="card-body">
                     <input type="hidden" value="0" id="txtIdProyecto">
+                    <input type="hidden" value="0" id="txtIdEvaluacion">
+                    <input type="hidden" value="0" id="txtJurado">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="mb-3">
@@ -34,14 +36,6 @@
                                 <small id="lblEstadoCalificacion" class="text-muted"></small>
                             </div>
                         </div>
-                        <%--<div class="col-md-3">
-                            <div class="mb-3">
-                                <div id="rater2" dir="ltr" class="star-rating" data-rating="4"
-                                    style="width: 80px; height: 16px; background-size: 16px;" title="My custom rating text 5">
-                                    <div class="star-value" style="background-size: 16px; width: 80%;"></div>
-                                </div>
-                            </div>
-                        </div>--%>
                     </div>
                     <div class="row">
                         <div class="col-md-7">
@@ -113,6 +107,27 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDetalleNota" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalle de Calificación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion" id="accordionDetalle">
+                        <div id="contenedorDetalleAspectos"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>--%>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><i class="ti ti-square-rounded-x me-1 fs-20"></i>Cerrar</button>
+                    <button type="button" id="btnReporte" class="btn btn-sm btn-info"><i class="ti ti-printer me-1 fs-20"></i>Reporte</button>
                 </div>
             </div>
         </div>
